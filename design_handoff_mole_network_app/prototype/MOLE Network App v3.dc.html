@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A3B24">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>html,body{height:100%;overscroll-behavior:none;-webkit-text-size-adjust:100%}body{margin:0;background:#E9E6DD;font-family:Figtree,system-ui,sans-serif;color:#10241A;-webkit-font-smoothing:antialiased}a{color:#0F4D30}a:hover{color:#B8862A}*{box-sizing:border-box;scrollbar-width:none}input,select,textarea,button{font-family:inherit}::-webkit-scrollbar{width:0;height:0}@keyframes moleToast{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}</style>
+</helmet>
+<div style="min-height:100dvh;display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:{{ L.gap }};padding:{{ L.pad }};background:{{ L.pageBg }}">
+
+<sc-if value="{{ showSide }}" hint-placeholder-val="{{ true }}">
+<div style="width:280px;max-width:100%;display:flex;flex-direction:column;gap:20px;padding-top:12px">
+  <img src="assets/mole-logo.png" alt="MOLE Network" style="width:240px;height:150px;object-fit:cover;object-position:50% 52%;mix-blend-mode:multiply;margin-left:-14px">
+  <div style="display:flex;flex-direction:column;gap:4px">
+    <div style="font:400 26px/1.1 'DM Serif Display',serif;color:#0A3B24">Member app prototype</div>
+    <div style="font-size:13px;line-height:1.5;color:#5E6B63;text-wrap:pretty">v3 · 25 screens. Program v1.1 terms confirmed (Section 15). Member, business and MOLE staff flows; progress saves on this device.</div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:2px">
+    <sc-for list="{{ screenList }}" as="it" hint-placeholder-count="12">
+      <button onClick="{{ it.go }}" style="display:flex;align-items:center;gap:12px;padding:9px 12px;border:0;border-radius:10px;background:{{ it.bg }};color:{{ it.fg }};cursor:pointer;text-align:left;font-size:14px;font-weight:600" style-hover="background:rgba(10,59,36,.08)">
+        <span style="width:22px;font:700 11px ui-monospace,Menlo,monospace;opacity:.6">{{ it.num }}</span>{{ it.label }}
+      </button>
+    </sc-for>
+  </div>
+  <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#7A857E;border-top:1px solid rgba(10,59,36,.15);padding-top:14px">MOLE Network · A Merch Corporation company</div>
+</div>
+</sc-if>
+
+<div style="width:{{ L.outerW }};max-width:100%;height:{{ L.outerH }};flex:none;border-radius:{{ L.outerR }};background:{{ L.outerBg }};padding:{{ L.outerPad }};box-shadow:{{ L.outerSh }}">
+<div style="position:relative;width:100%;height:100%;border-radius:{{ L.innerR }};overflow:hidden;background:#F6F5F0;display:flex;flex-direction:column">
+
+  <sc-if value="{{ L.app }}" hint-placeholder-val="{{ false }}"><div style="flex:none;height:env(safe-area-inset-top,0px);background:{{ statusBg }}"></div></sc-if>
+  <sc-if value="{{ L.frame }}" hint-placeholder-val="{{ true }}">
+  <div style="height:50px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:6px 30px 0 34px;background:{{ statusBg }};color:{{ statusFg }};font-weight:700;font-size:15px;position:relative">
+    <span>9:41</span>
+    <div style="position:absolute;left:50%;top:11px;transform:translateX(-50%);width:120px;height:34px;border-radius:20px;background:#000"></div>
+    <div style="display:flex;gap:5px;align-items:center">
+      <svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"></rect><rect x="5" y="5" width="3" height="7" rx="1"></rect><rect x="10" y="2.5" width="3" height="9.5" rx="1"></rect><rect x="15" y="0" width="3" height="12" rx="1"></rect></svg>
+      <svg width="26" height="12" viewBox="0 0 26 12" fill="none"><rect x=".5" y=".5" width="22" height="11" rx="3.5" stroke="currentColor" opacity=".4"></rect><rect x="2" y="2" width="17" height="8" rx="2" fill="currentColor"></rect><rect x="24" y="4" width="2" height="4" rx="1" fill="currentColor" opacity=".4"></rect></svg>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- 1 WELCOME -->
+  <sc-if value="{{ is.welcome }}" hint-placeholder-val="{{ true }}">
+  <div style="flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;background:#fff">
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:safe center;padding:6px 20px 0;min-height:110px;flex:1 0 auto">
+      <img src="assets/mole-logo.png" alt="MOLE Network — It's Who You Know" style="width:min(300px,100%,38dvh);height:auto;aspect-ratio:340/220;object-fit:cover;object-position:50% 50%;flex:none">
+    </div>
+    <div style="flex:none;background:#0A3B24;border-radius:32px 32px 0 0;padding:26px 24px {{ L.welcomePad }};display:flex;flex-direction:column;gap:16px;color:#fff">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#E6BE62">No fees · No inventory · No recruiting</div>
+        <div style="font:400 26px/1.15 'DM Serif Display',serif;color:#fff;text-wrap:balance">Get paid when your recommendation becomes a customer.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:12px;font-weight:700;color:#A9C4B3">Live offers near you · what you'd receive</div>
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+          <sc-for list="{{ welcomeOffers }}" as="o" hint-placeholder-count="4">
+            <button onClick="{{ o.open }}" style="min-width:0;border:1px solid rgba(255,255,255,.16);border-radius:14px;background:rgba(255,255,255,.06);padding:12px;display:flex;flex-direction:column;gap:4px;text-align:left;cursor:pointer;color:#fff" style-hover="background:rgba(255,255,255,.12)">
+              <span style="display:flex;align-items:center;gap:8px;min-width:0"><span style="width:10px;height:10px;border-radius:50%;background:{{ o.tone }};box-shadow:0 0 0 2px rgba(255,255,255,.25);flex:none"></span><span style="font-size:13px;font-weight:700;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ o.name }}</span></span>
+              <span style="font-size:20px;font-weight:800;color:#F3D489;letter-spacing:-.01em">{{ o.amt }}</span>
+              <span style="font-size:12px;color:#A9C4B3">{{ o.per }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button onClick="{{ goMarket }}" style="height:52px;border:0;border-radius:14px;background:linear-gradient(180deg,#E6BE62,#BF8C2C);color:#062A19;font-weight:800;cursor:pointer;font-size:16px" style-active="transform:scale(.98)">Browse the Marketplace</button>
+        <button onClick="{{ goJoin }}" style="height:52px;border-radius:14px;background:transparent;border:1.5px solid rgba(255,255,255,.5);color:#fff;font-size:16px;font-weight:700;cursor:pointer" style-hover="background:rgba(255,255,255,.08)">Join free</button>
+        <button onClick="{{ goSignIn }}" style="height:44px;background:none;border:0;color:#F3D489;font-size:14px;font-weight:700;cursor:pointer">Already a member? Sign in</button>
+      </div>
+      <div style="text-align:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8FB29E">A Merch Corporation company</div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- 2 JOIN / LOGIN -->
+  <sc-if value="{{ is.auth }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A3B24;color:#fff;height:52px;flex:none;display:flex;align-items:center;padding:0 12px">
+    <button onClick="{{ back }}" aria-label="Back" style="width:44px;height:44px;border:0;background:none;color:#fff;cursor:pointer;display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;background:#fff;padding:24px 24px 30px;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;gap:18px">
+    <div style="display:flex;flex-direction:column;gap:6px;text-align:center">
+      <div style="font:400 28px/1.15 'DM Serif Display',serif;color:#0A3B24">{{ authTitle }}</div>
+      <div style="font-size:14px;color:#5E6B63;line-height:1.5">{{ authSub }}</div>
+    </div>
+    <sc-if value="{{ hasFromOffer }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;gap:12px;align-items:center;padding:12px;border-radius:14px;background:#FBF6EA;border:1px solid #EFE4C8">
+        <div style="width:48px;height:48px;border-radius:12px;flex:none;background:{{ fromOffer.tone }}"></div>
+        <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:12px;color:#7A857E;font-weight:700">Your first offer, ready to share</span><span style="font-size:15px;font-weight:800">{{ fromOffer.name }}</span><span style="font-size:13px;font-weight:800;color:#0F4D30">{{ fromOffer.net }}</span></div>
+      </div>
+    </sc-if>
+    <div style="display:grid;grid-template-columns:1fr 1fr;background:#EEF1EE;border-radius:12px;padding:4px">
+      <button onClick="{{ setJoin }}" style="height:38px;border:0;border-radius:9px;font-weight:700;font-size:14px;cursor:pointer;background:{{ authTab.joinBg }};color:{{ authTab.joinFg }};box-shadow:{{ authTab.joinSh }}">Create account</button>
+      <button onClick="{{ setSignIn }}" style="height:38px;border:0;border-radius:9px;font-weight:700;font-size:14px;cursor:pointer;background:{{ authTab.inBg }};color:{{ authTab.inFg }};box-shadow:{{ authTab.inSh }}">Sign in</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ isJoin }}" hint-placeholder-val="{{ true }}">
+      <label style="display:flex;align-items:center;gap:10px;height:50px;border:1.5px solid #DCE2DE;border-radius:12px;padding:0 14px;color:#7A857E">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"></path></svg>
+        <input value="{{ form.name }}" onChange="{{ onName }}" placeholder="Full name" style="flex:1;border:0;outline:0;font-size:16px;color:#10241A;background:none">
+      </label>
+      </sc-if>
+      <label style="display:flex;align-items:center;gap:10px;height:50px;border:1.5px solid #DCE2DE;border-radius:12px;padding:0 14px;color:#7A857E">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>
+        <input value="{{ form.email }}" onChange="{{ onEmail }}" type="email" placeholder="Email address" style="flex:1;border:0;outline:0;font-size:16px;color:#10241A;background:none">
+      </label>
+      <label style="display:flex;align-items:center;gap:10px;height:50px;border:1.5px solid #DCE2DE;border-radius:12px;padding:0 14px;color:#7A857E">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 018 0v3"></path></svg>
+        <input value="{{ form.pw }}" onChange="{{ onPw }}" type="password" placeholder="{{ pwPlaceholder }}" style="flex:1;border:0;outline:0;font-size:16px;color:#10241A;background:none">
+      </label>
+      <sc-if value="{{ hasFormErr }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:13px;color:#B3261E;font-weight:600">{{ formErr }}</div>
+      </sc-if>
+      <button onClick="{{ submitAuth }}" style="height:52px;margin-top:4px;border:0;border-radius:14px;background:linear-gradient(180deg,#E6BE62,#BF8C2C);color:#062A19;font-size:16px;font-weight:800;cursor:pointer" style-active="transform:scale(.98)">{{ authCta }}</button>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;color:#9AA49E;font-size:12px"><div style="flex:1;height:1px;background:#E3E7E4"></div>or<div style="flex:1;height:1px;background:#E3E7E4"></div></div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-for list="{{ socials }}" as="so" hint-placeholder-count="3">
+        <button onClick="{{ socialLogin }}" style="height:48px;border:1.5px solid #DCE2DE;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;gap:10px;font-size:15px;font-weight:600;color:#10241A;cursor:pointer" style-hover="background:#F6F5F0">
+          <span style="width:22px;height:22px;border-radius:6px;background:{{ so.c }};color:#fff;display:grid;place-items:center;font-size:12px;font-weight:800">{{ so.l }}</span>Continue with {{ so.name }}
+        </button>
+      </sc-for>
+    </div>
+    <div style="font-size:12px;color:#7A857E;text-align:center;line-height:1.5;text-wrap:pretty">Members never pay to join. By continuing you agree to the MOLE Network Terms and Referral Program Rules.</div>
+  </div>
+  </sc-if>
+
+  <!-- 2B ONBOARDING -->
+  <sc-if value="{{ is.onboard }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#fff;flex:none;padding:8px 12px 0 24px;display:flex;align-items:center;gap:12px">
+    <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:6px"><div style="height:5px;border-radius:3px;background:#0F4D30"></div><div style="height:5px;border-radius:3px;background:{{ onBar2 }}"></div></div>
+    <button onClick="{{ skipOnboard }}" style="height:44px;padding:0 12px;border:0;background:none;color:#5E6B63;font-weight:700;font-size:14px;cursor:pointer">Skip</button>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;background:#fff;padding:12px 24px 20px;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;gap:18px">
+    <sc-if value="{{ onIs.s1 }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;gap:6px"><div style="font:400 28px/1.15 'DM Serif Display',serif;color:#0A3B24">What do your friends ask you about?</div><div style="font-size:14px;color:#5E6B63">Pick any. We'll match you with local offers.</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <sc-for list="{{ interestOpts }}" as="io" hint-placeholder-count="6">
+          <button onClick="{{ io.go }}" style="min-height:56px;padding:10px 14px;border-radius:14px;border:1.5px solid {{ io.bd }};background:{{ io.bg }};color:#10241A;font-size:15px;font-weight:700;text-align:left;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px">{{ io.name }}<span style="color:#0F4D30;font-weight:900">{{ io.mark }}</span></button>
+        </sc-for>
+      </div>
+    </sc-if>
+    <sc-if value="{{ onIs.s2 }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:6px"><div style="font:400 28px/1.15 'DM Serif Display',serif;color:#0A3B24">Three offers for you</div><div style="font-size:14px;color:#5E6B63;line-height:1.5">Amounts are what you receive after the MOLE fee. Share one to get started.</div></div>
+      <sc-for list="{{ onOffers }}" as="o" hint-placeholder-count="3">
+        <div style="display:flex;gap:12px;align-items:center;padding:12px;border-radius:16px;border:1.5px solid #E3E7E4">
+          <div style="width:56px;height:56px;border-radius:12px;flex:none;background:{{ o.tone }}"></div>
+          <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:800">{{ o.name }}</span><span style="font-size:12.5px;color:#5E6B63">{{ o.type }}</span><span style="font-size:13px;font-weight:800;color:#0F4D30">{{ o.net }}</span></div>
+          <button onClick="{{ o.share }}" style="height:44px;padding:0 16px;border:0;border-radius:14px;background:linear-gradient(180deg,#E6BE62,#BF8C2C);color:#062A19;font-weight:800;cursor:pointer;font-size:14px;flex:none">Share</button>
+        </div>
+      </sc-for>
+    </sc-if>
+  </div>
+  <div style="flex:none;padding:12px 24px {{ L.bottomPad }};background:#fff;border-top:1px solid #E3E7E4">
+    <sc-if value="{{ onIs.s1 }}" hint-placeholder-val="{{ true }}"><button onClick="{{ onNext }}" style="width:100%;height:52px;border:0;border-radius:14px;background:linear-gradient(180deg,#E6BE62,#BF8C2C);color:#062A19;font-weight:800;cursor:pointer;font-size:16px">Show my offers</button></sc-if>
+    <sc-if value="{{ onIs.s2 }}" hint-placeholder-val="{{ false }}"><button onClick="{{ skipOnboard }}" style="width:100%;height:52px;border:1.5px solid #0A3B24;border-radius:14px;background:#fff;color:#0A3B24;font-weight:700;font-size:16px;cursor:pointer">Go to my dashboard</button></sc-if>
+  </div>
+  </sc-if>
+
+  <!-- 3 PROFILE -->
+  <sc-if value="{{ is.profile }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A3B24;color:#fff;height:52px;flex:none;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;position:relative">My Profile</div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content">
+    <div style="background:#fff;display:flex;flex-direction:column;align-items:center;gap:6px;padding:24px 24px 20px">
+      <div style="width:92px;height:92px;border-radius:50%;background:#0F4D30;color:#F3D489;display:grid;place-items:center;font:400 36px 'DM Serif Display',serif;border:3px solid #E6BE62">{{ initials }}</div>
+      <div style="font:400 24px/1.2 'DM Serif Display',serif;color:#0A3B24;margin-top:6px">{{ name }}</div>
+      <div style="display:flex;gap:8px;align-items:center;font-size:13px;color:#5E6B63">MOLE Member <span style="width:3px;height:3px;border-radius:50%;background:#9AA49E"></span> Code <b style="color:#0A3B24">{{ code }}</b></div>
+      <button onClick="{{ goEditProfile }}" style="margin-top:10px;height:44px;padding:0 28px;border:1.5px solid #0A3B24;border-radius:12px;background:#fff;color:#0A3B24;font-weight:700;font-size:14px;cursor:pointer" style-hover="background:#EEF4F0">Edit Profile</button>
+    </div>
+    <div style="margin:14px 16px;background:#fff;border-radius:16px;overflow:hidden">
+      <sc-for list="{{ profileRows }}" as="r" hint-placeholder-count="8">
+        <button onClick="{{ r.go }}" style="width:100%;display:flex;align-items:center;gap:14px;padding:0 16px;height:54px;border:0;border-bottom:1px solid #EEF0EE;background:#fff;cursor:pointer;text-align:left" style-hover="background:#F9FAF8">
+          <span style="width:30px;height:30px;border-radius:9px;background:#EEF4F0;color:#0F4D30;display:grid;place-items:center;font-size:13px;font-weight:800">{{ r.i }}</span>
+          <span style="flex:1;font-size:15px;font-weight:600;color:#10241A">{{ r.label }}</span>
+          <span style="font-size:12px;color:#B8862A;font-weight:700">{{ r.tag }}</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9AA49E" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"></path></svg>
+        </button>
+      </sc-for>
+    </div>
+    <button onClick="{{ signOut }}" style="margin:0 16px;height:48px;border:0;border-radius:14px;background:#fff;color:#B3261E;font-weight:700;font-size:15px;cursor:pointer">Sign Out</button>
+    <div style="padding:18px 24px 24px;text-align:center;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#9AA49E">MOLE Network · A Merch Corporation company · v1.0</div>
+  </div>
+  </sc-if>
+
+  <!-- 4 DASHBOARD -->
+  <sc-if value="{{ is.dashboard }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A3B24;color:#fff;flex:none;padding:6px 16px 22px;display:flex;flex-direction:column;gap:18px">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;flex-direction:column;align-items:center;line-height:1">
+        <div style="font-size:26px;font-weight:900;letter-spacing:-.02em">MOL<span style="color:#E6BE62">E</span></div>
+        <div style="font-size:7.5px;font-weight:700;letter-spacing:.42em;color:#E6BE62;margin-top:2px;margin-right:-.42em">NETWORK</div>
+      </div>
+      <button onClick="{{ goInbox }}" aria-label="Notifications" style="width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.1);color:#fff;cursor:pointer;display:grid;place-items:center;position:relative"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0112 0c0 7 3 8 3 8H3s3-1 3-8"></path><path d="M10 20a2 2 0 004 0"></path></svg><sc-if value="{{ hasUnread }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;top:10px;right:11px;width:8px;height:8px;border-radius:50%;background:#E6BE62"></span></sc-if></button>
+    </div>
+    <div>
+      <div style="font-size:13px;color:#A9C4B3;font-weight:600">It's who you know.</div>
+      <div style="font:400 30px/1.15 'DM Serif Display',serif">Welcome, {{ first }}!</div>
+    </div>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;padding:0 16px 20px;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;gap:16px;margin-top:-10px">
+    <button onClick="{{ goEarnings }}" style="border:0;border-radius:18px;background:#fff;padding:18px;display:flex;flex-direction:column;gap:12px;text-align:left;cursor:pointer;box-shadow:0 2px 8px rgba(6,42,25,.08)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#7A857E">Your earnings</span><span style="font-size:12px;font-weight:800;color:#9A6E1C">Next payout Nov 15</span></div>
+      <span style="font:400 40px/1 'DM Serif Display',serif;color:#0A3B24">$160.00</span>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:13px;color:#5E6B63"><div><b style="display:block;font-size:16px;color:#10241A">$120</b>Pending</div><div><b style="display:block;font-size:16px;color:#10241A">$40</b>Approved</div><div><b style="display:block;font-size:16px;color:#10241A">$0</b>Paid</div></div>
+    </button>
+    <div style="background:#fff;border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="font-size:14px;font-weight:800">{{ msTitle }}</span><span style="font-size:12px;color:#7A857E;font-weight:700">{{ msCount }}</span></div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+        <sc-for list="{{ milestones }}" as="m" hint-placeholder-count="4">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center">
+            <div style="width:28px;height:28px;border-radius:50%;background:{{ m.bg }};color:{{ m.fg }};border:2px solid {{ m.bd }};display:grid;place-items:center;font-size:12px;font-weight:900">{{ m.mark }}</div>
+            <span style="font-size:11px;font-weight:700;line-height:1.2;color:{{ m.lc }}">{{ m.name }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="font:400 20px 'DM Serif Display',serif;color:#0A3B24">Recommended for you</div>
+    <div style="background:#fff;border-radius:18px;overflow:hidden;display:flex;flex-direction:column">
+      <div style="height:110px;background:{{ rec.tone }};background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.1) 0 8px,transparent 8px 16px)"></div>
+      <div style="padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:800">{{ rec.name }}</span><span style="font-size:13px;color:#5E6B63">{{ rec.type }}</span><span style="font-size:14px;font-weight:800;color:#0F4D30">{{ rec.net }}</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <button onClick="{{ rec.open }}" style="height:44px;border:1.5px solid #0A3B24;border-radius:12px;background:#fff;color:#0A3B24;font-weight:700;font-size:14px;cursor:pointer">View terms</button>
+          <button onClick="{{ rec.share }}" style="height:44px;border:0;border-radius:14px;background:linear-gradient(180deg,#E6BE62,#BF8C2C);color:#062A19;font-weight:800;cursor:pointer;font-size:14px">Share</button>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <sc-for list="{{ dashStats }}" as="st" hint-placeholder-count="4">
+        <button onClick="{{ st.go }}" style="background:#fff;border:0;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:6px;text-align:left;cursor:pointer;box-shadow:0 1px 2px rgba(6,42,25,.06)" style-hover="box-shadow:0 4px 14px rgba(6,42,25,.1)">
+          <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#7A857E">{{ st.label }}</span>
+          <span style="font-size:26px;font-weight:800;color:#0A3B24;letter-spacing:-.02em">{{ st.v }}</span>
+        </button>
+      </sc-for>
+    </div>
+    <div style="font:400 20px 'DM Serif Display',serif;color:#0A3B24;margin-top:4px">Quick actions</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <button onClick="{{ goMarket }}" style="background:#fff;border:0;border-radius:16px;padding:16px 8px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;color:#0F4D30"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><span style="font-size:13px;font-weight:700;color:#10241A;line-height:1.2">Find businesses</span></button>
+      <button onClick="{{ goShareDefault }}" style="background:#fff;border:0;border-radius:16px;padding:16px 8px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;color:#0F4D30"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"></path></svg><span style="font-size:13px;font-weight:700;color:#10241A;line-height:1.2">Share an offer</span></button>
+      <button onClick="{{ goTracking }}" style="background:#fff;border:0;border-radius:16px;padding:16px 8px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;color:#0F4D30"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg><span style="font-size:13px;font-weight:700;color:#10241A;line-height:1.2">Track referrals</span></button>
+    </div>
+    <button onClick="{{ goPostAd }}" style="border:1.5px dashed #C9A24A;border-radius:16px;background:#FBF6EA;padding:16px;display:flex;flex-direction:column;gap:4px;text-align:left;cursor:pointer">
+      <span style="font-weight:800;font-size:15px;color:#0A3B24">Own a business? List it free.</span>
+      <span style="font-size:13px;color:#5E6B63;line-height:1.45">Pay only when a referral is verified. Post your first offer in three steps.</span>
+    </button>
+  </div>
+  </sc-if>
+
+  <!-- 5 NETWORK -->
+  <sc-if value="{{ is.network }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A3B24;color:#fff;height:52px;flex:none;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700">My Network</div>
+  <div style="background:#fff;display:grid;grid-template-columns:1fr 1fr;flex:none;border-bottom:1px solid #E3E7E4">
+    <button onClick="{{ setConn }}" style="height:48px;border:0;background:none;font-size:14px;font-weight:700;cursor:pointer;color:{{ netTab.connFg }};box-shadow:inset 0 -3px 0 {{ netTab.connLine }}">My Connections</button>
+    <button onClick="{{ setTeam }}" style="height:48px;border:0;background:none;font-size:14px;font-weight:700;cursor:pointer;color:{{ netTab.teamFg }};box-shadow:inset 0 -3px 0 {{ netTab.teamLine }}">My Circle</button>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;padding:16px;gap:14px">
+    <div style="padding:12px 14px;border-radius:14px;background:#EEF4F0;font-size:13px;line-height:1.5;color:#0F4D30;text-wrap:pretty"><b>You earn only on your own referrals.</b> Never on activity by people you invite.</div>
+    <sc-if value="{{ isTeam }}" hint-placeholder-val="{{ false }}">
+      <div style="font:400 20px 'DM Serif Display',serif;color:#0A3B24">Offers your circle is sharing</div>
+      <div style="background:#fff;border-radius:16px;overflow:hidden">
+        <sc-for list="{{ circleShares }}" as="c" hint-placeholder-count="3">
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #EEF0EE">
+            <div style="width:44px;height:44px;border-radius:50%;background:{{ c.bg }};color:{{ c.fg }};display:grid;place-items:center;font-weight:800;font-size:14px;flex:none">{{ c.ini }}</div>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;line-height:1.35"><b>{{ c.first }}</b> is sharing <b>{{ c.biz }}</b></span><span style="font-size:12px;color:#7A857E">{{ c.when }} · {{ c.net }}</span></div>
+            <button onClick="{{ c.share }}" style="height:44px;padding:0 12px;border:1.5px solid #0A3B24;border-radius:12px;background:#fff;color:#0A3B24;font-weight:700;font-size:13px;cursor:pointer;flex:none">Share too</button>
+          </div>
+        </sc-for>
+      </div>
+      <div style="font-size:12px;color:#7A857E;line-height:1.5">Your circle sees which offers you share — never what you earn.</div>
+    </sc-if>
+    <sc-if value="{{ isConn }}" hint-placeholder-val="{{ true }}">
+      <div style="background:#fff;border-radius:16px;overflow:hidden">
+        <sc-for list="{{ connections }}" as="p" hint-placeholder-count="5">
+          <div style="display:flex;align-items:center;gap:14px;padding:12px 16px;border-bottom:1px solid #EEF0EE">
+            <div style="width:46px;height:46px;border-radius:50%;background:{{ p.bg }};color:{{ p.fg }};display:grid;place-items:center;font-weight:800;font-size:15px;flex:none">{{ p.ini }}</div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-size:15px;font-weight:700">{{ p.name }}</span><span style="font-size:12.5px;color:#5E6B63">{{ p.sub }}</span></div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+    <button onClick="{{ invite }}" style="height:50px;border:1.5px solid #0A3B24;border-radius:14px;background:#fff;color:#0A3B24;font-weight:700;font-size:15px;cursor:pointer">Invite a friend with an offer</button>
+  </div>
+  </sc-if>
+
+  <!-- 6 MARKETPLACE -->
+  <sc-if value="{{ is.marketplace }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A3B24;color:#fff;flex:none;padding:4px 16px 14px;display:flex;flex-direction:column;gap:12px">
+    <div style="height:40px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700">Marketplace</div>
+    <div style="display:flex;gap:8px">
+    <label style="flex:1;min-width:0;height:44px;border-radius:12px;background:#fff;display:flex;align-items:center;gap:10px;padding:0 14px;color:#7A857E">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex:none"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+      <input value="{{ q }}" onChange="{{ onQ }}" placeholder="Search businesses or services" style="flex:1;min-width:0;border:0;outline:0;font-size:16px;color:#10241A;background:none">
+    </label>
+    <button onClick="{{ openSheet }}" aria-label="Sort and filter" style="width:44px;height:44px;flex:none;border:0;border-radius:12px;background:{{ filterBg }};color:{{ filterFg }};cursor:pointer;display:grid;place-items:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"></path></svg></button>
+    </div>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content">
+    <div style="display:flex;gap:8px;padding:14px 16px;overflow-x:auto;flex:none">
+      <sc-for list="{{ cats }}" as="c" hint-placeholder-count="6">
+        <button onClick="{{ c.go }}" style="flex:none;height:44px;padding:0 16px;border-radius:22px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font-size:13px;font-weight:700;cursor:pointer">{{ c.name }}</button>
+      </sc-for>
+    </div>
+    <sc-if value="{{ showSections }}" hint-placeholder-val="{{ true }}">
+    <div style="padding:4px 16px 10px"><div style="font:400 20px 'DM Serif Display',serif;color:#0A3B24">Top-paying this week</div></div>
+    <div style="display:flex;gap:10px;overflow-x:auto;padding:0 16px 16px">
+      <sc-for list="{{ topPaying }}" as="t" hint-placeholder-count="3">
+        <button onClick="{{ t.open }}" style="flex:none;width:184px;border:0;border-radius:16px;background:#fff;overflow:hidden;text-align:left;cursor:pointer;display:flex;flex-direction:column">
+          <div style="height:84px;width:100%;background:{{ t.tone }};background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.12) 0 6px,transparent 6px 12px)"></div>
+          <div style="padding:10px 12px 12px;display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:800;color:#10241A">{{ t.name }}</span><span style="font-size:12px;color:#5E6B63">{{ t.type }}</span><span style="font-size:13px;font-weight:800;color:#0F4D30;margin-top:2px">{{ t.net }}</span></div>
+        </button>
+      </sc-for>
+    </div>
+    <div style="padding:4px 16px 10px"><div style="font:400 20px 'DM Serif Display',serif;color:#0A3B24">New near you</div></div>
+    <div style="display:flex;gap:10px;overflow-x:auto;padding:0 16px 16px">
+      <sc-for list="{{ newNear }}" as="t" hint-placeholder-count="3">
+        <button onClick="{{ t.open }}" style="flex:none;width:184px;border:0;border-radius:16px;background:#fff;overflow:hidden;text-align:left;cursor:pointer;display:flex;flex-direction:column">
+          <div style="height:84px;width:100%;background:{{ t.tone }};background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.12) 0 6px,transparent 6px 12px)"></div>
+          <div style="padding:10px 12px 12px;display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:800;color:#10241A">{{ t.name }}</span><span style="font-size:12px;color:#5E6B63">{{ t.type }}</span><span style="font-size:13px;font-weight:800;color:#0F4D30;margin-top:2px">{{ t.net }}</span></div>
+        </button>
+      </sc-for>
+    </div>
+    </sc-if>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;padding:4px 16px 10px"><span style="font:400 20px 'DM Serif Display',serif;color:#0A3B24">{{ listTitle }}</span><span style="font-size:12px;color:#7A857E;font-weight:600">{{ bizCount }}</span></div>
+    <div style="display:flex;flex-direction:column;gap:10px;padding:0 16px 20px">
+      <sc-for list="{{ bizList }}" as="b" hint-placeholder-count="4">
+        <button onClick="{{ b.open }}" style="display:flex;gap:14px;align-items:center;padding:10px;border:0;border-radius:16px;background:#fff;cursor:pointer;text-align:left" style-hover="box-shadow:0 4px 14px rgba(6,42,25,.1)">
+          <div style="width:76px;height:76px;border-radius:12px;flex:none;background:{{ b.tone }};background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.12) 0 6px,transparent 6px 12px);display:grid;place-items:center;color:rgba(255,255,255,.85);font:700 9px ui-monospace,Menlo,monospace;text-transform:uppercase">photo</div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:3px;min-width:0">
+            <span style="font-size:15px;font-weight:800;color:#10241A;display:flex;align-items:center;gap:6px">{{ b.name }}<span title="Verified business" style="width:16px;height:16px;border-radius:50%;background:#0F4D30;color:#fff;display:grid;place-items:center;font-size:10px;flex:none">✓</span></span>
+            <span style="font-size:13px;color:#5E6B63">{{ b.type }} · {{ b.distStr }} · Pays on time {{ b.rel }}</span>
+            <span style="align-self:flex-start;margin-top:4px;font-size:12px;font-weight:800;color:#0A3B24;background:#E3F0E7;padding:4px 8px;border-radius:6px">{{ b.net }}</span>
+          </div>
+        </button>
+      </sc-for>
+      <sc-if value="{{ noBiz }}" hint-placeholder-val="{{ false }}"><div style="padding:30px;text-align:center;color:#7A857E;font-size:14px">No businesses match “{{ q }}”.</div></sc-if>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- 7 BUSINESS PROFILE -->
+  <sc-if value="{{ is.bizprofile }}" hint-placeholder-val="{{ false }}">
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;display:flex;flex-direction:column;background:#fff">
+    <div style="height:210px;flex:none;position:relative;background:{{ cur.tone }};background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.1) 0 10px,transparent 10px 20px);display:grid;place-items:center;color:rgba(255,255,255,.8);font:700 11px ui-monospace,Menlo,monospace;text-transform:uppercase;letter-spacing:.1em"><span>{{ cur.name }} — cover photo</span>
+      <button onClick="{{ back }}" aria-label="Back" style="position:absolute;top:10px;left:12px;width:44px;height:44px;border:0;border-radius:50%;background:rgba(6,42,25,.55);color:#fff;cursor:pointer;display:grid;place-items:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+    </div>
+    <div style="padding:18px 20px 0;display:flex;gap:12px;align-items:flex-start">
+      <div style="flex:1;display:flex;flex-direction:column;gap:4px">
+        <div style="font:400 26px/1.1 'DM Serif Display',serif;color:#0A3B24">{{ cur.name }}</div>
+        <div style="font-size:14px;color:#5E6B63">{{ cur.type }}</div>
+        <div style="font-size:12px;font-weight:700;color:#0F4D30">✓ Verified business · Pays on time {{ cur.rel }}</div>
+        <div style="font-size:13px;color:#10241A;font-weight:700;display:flex;gap:6px;align-items:center"><span style="color:#C08E2E">★</span>{{ cur.rating }} <span style="font-weight:500;color:#7A857E">({{ cur.reviews }} reviews)</span></div>
+      </div>
+      <button onClick="{{ toggleFollow }}" style="height:44px;padding:0 18px;border-radius:12px;border:1.5px solid #BF8C2C;background:{{ followBg }};color:{{ followFg }};font-weight:800;font-size:14px;cursor:pointer">{{ followLabel }}</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);margin-top:16px;border-bottom:1px solid #E3E7E4">
+      <sc-for list="{{ bizTabs }}" as="t" hint-placeholder-count="3">
+        <button onClick="{{ t.go }}" style="height:46px;border:0;background:none;font-size:14px;font-weight:700;cursor:pointer;color:{{ t.fg }};box-shadow:inset 0 -3px 0 {{ t.line }}">{{ t.name }}</button>
+      </sc-for>
+    </div>
+    <div style="padding:18px 20px 28px;display:flex;flex-direction:column;gap:14px;background:#F6F5F0;flex:1">
+      <sc-if value="{{ bizTabIs.offers }}" hint-placeholder-val="{{ true }}">
+        <div style="background:#fff;border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:14px;border:1px solid #EFE4C8">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(180deg,#E6BE62,#BF8C2C);color:#062A19;display:grid;place-items:center;font-weight:900;font-size:18px;flex:none">$</div>
+            <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:18px;font-weight:800">{{ cur.reward }}</span><span style="font-size:13px;color:#5E6B63">{{ cur.rewardType }}</span></div>
+          </div>
+          <div style="font-size:14px;line-height:1.5;color:#10241A;text-wrap:pretty">{{ cur.offerText }}</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-radius:12px;background:#F6F5F0;padding:12px 4px;text-align:center">
+            <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:#7A857E;font-weight:700;text-transform:uppercase;letter-spacing:.05em">Reward</span><span style="font-weight:800">{{ cur.ex.reward }}</span></div>
+            <div style="display:flex;flex-direction:column;gap:2px;border-left:1px solid #E3E7E4;border-right:1px solid #E3E7E4"><span style="font-size:11px;color:#7A857E;font-weight:700;text-transform:uppercase;letter-spacing:.05em">MOLE fee</span><span style="font-weight:800">{{ cur.ex.fee }}</span></div>
+            <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:#7A857E;font-weight:700;text-transform:uppercase;letter-spacing:.05em">You get</span><span style="font-weight:800;color:#0F4D30">{{ cur.ex.member }}</span></div>
+          </div>
+          <div style="font-size:12px;color:#7A857E;line-height:1.45">{{ cur.ex.note }}</div>
+          <div style="display:flex;flex-direction:column;border-top:1px solid #EEF0EE">
+            <div style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7A857E;padding:12px 0 4px">Offer terms</div>
+            <sc-for list="{{ cur.terms }}" as="tm" hint-placeholder-count="5">
+              <div style="display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px solid #EEF0EE;font-size:13px"><span style="color:#5E6B63;flex:none">{{ tm.k }}</span><span style="font-weight:700;text-align:right">{{ tm.v }}</span></div>
+            </sc-for>
+          </div>
+          <button onClick="{{ goShare }}" style="height:50px;border:0;border-radius:14px;background:linear-gradient(180deg,#E6BE62,#BF8C2C);color:#062A19;font-weight:800;font-size:15px;cursor:pointer">Share this offer</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ bizTabIs.about }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:15px;line-height:1.6;color:#10241A;text-wrap:pretty">{{ cur.about }}</div>
+        <div style="background:#fff;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;font-size:14px"><div><b>Hours</b> · {{ cur.hours }}</div><div><b>Area</b> · {{ cur.area }}</div></div>
+      </sc-if>
+      <sc-if value="{{ bizTabIs.products }}" hint-placeholder-val="{{ false }}">
+        <sc-for list="{{ cur.products }}" as="pr" hint-placeholder-count="3">
+          <div style="background:#fff;border-radius:14px;padding:14px 16px;display:flex;justify-content:space-between;gap:12px;font-size:15px"><span style="font-weight:600">{{ pr.n }}</span><span style="font-weight:800;color:#0A3B24">{{ pr.p }}</span></div>
+        </sc-for>
+      </sc-if>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- 8 POST AN AD -->
+  <sc-if value="{{ is.postad }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A3B24;color:#fff;height:52px;flex:none;display:flex;align-items:center;padding:0 12px;gap:4px">
+    <button onClick="{{ adBack }}" aria-label="Back" style="width:44px;height:44px;border:0;background:none;color:#fff;cursor:pointer;display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+    <span style="font-size:17px;font-weight:700">Post an Offer</span>
+  </div>
+  <div style="background:#fff;flex:none;display:flex;justify-content:space-between;padding:16px 36px;border-bottom:1px solid #E3E7E4">
+    <sc-for list="{{ adSteps }}" as="s" hint-placeholder-count="3">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <div style="width:32px;height:32px;border-radius:50%;background:{{ s.bg }};color:{{ s.fg }};border:2px solid {{ s.bd }};display:grid;place-items:center;font-weight:800;font-size:13px">{{ s.mark }}</div>
+        <span style="font-size:12px;font-weight:700;color:{{ s.lc }}">{{ s.name }}</span>
+      </div>
+    </sc-for>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;padding:20px;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;gap:16px">
+    <sc-if value="{{ adIs.s1 }}" hint-placeholder-val="{{ true }}">
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700">Business name<input value="{{ ad.name }}" onChange="{{ onAdName }}" style="width:100%;min-width:0;height:48px;border:1.5px solid #DCE2DE;border-radius:12px;padding:0 14px;font-size:16px;outline-color:#0F4D30;background:#fff"></label>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700">Category
+        <select value="{{ ad.cat }}" onChange="{{ onAdCat }}" style="height:48px;border:1.5px solid #DCE2DE;border-radius:12px;width:100%;padding:0 12px;font-size:16px;background:#fff;color:#10241A">
+          <option>Food &amp; Beverages</option><option>Retail</option><option>Home Services</option><option>Professional Services</option><option>Health &amp; Fitness</option><option>Real Estate</option><option>Insurance</option><option>Legal Services</option>
+        </select>
+      </label>
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700">Offer image
+        <div style="height:120px;border:1.5px dashed #C9CFCB;border-radius:12px;background:#fff;display:grid;place-items:center;font:600 12px ui-monospace,Menlo,monospace;color:#7A857E">Drop product photo</div>
+      </div>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700">Description<textarea value="{{ ad.desc }}" onChange="{{ onAdDesc }}" rows="3" style="border:1.5px solid #DCE2DE;border-radius:12px;width:100%;padding:12px 14px;font-size:16px;line-height:1.45;resize:none;outline-color:#0F4D30;background:#fff"></textarea></label>
+    </sc-if>
+    <sc-if value="{{ adIs.s2 }}" hint-placeholder-val="{{ false }}">
+      <sc-if value="{{ restricted }}" hint-placeholder-val="{{ false }}"><div style="padding:16px;border-radius:14px;background:#FBF1D9;color:#5C410E;font-size:14px;line-height:1.5;display:flex;flex-direction:column;gap:6px"><b>Referral rewards are off for {{ ad.cat }}.</b><span>Licensed and regulated categories can list in the marketplace without a referral reward until attorney review confirms rewards are permitted.</span></div></sc-if>
+      <sc-if value="{{ notRestricted }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;font-weight:700">Reward type
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <sc-for list="{{ rewardTypes }}" as="rt" hint-placeholder-count="4">
+            <button onClick="{{ rt.go }}" style="min-height:58px;padding:10px 12px;border-radius:12px;border:1.5px solid {{ rt.bd }};background:{{ rt.bg }};text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:800;color:#10241A">{{ rt.name }}</span><span style="font-size:11.5px;font-weight:500;color:#5E6B63">{{ rt.sub }}</span></button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;min-width:0">{{ amountLabel }}<input value="{{ ad.amount }}" onChange="{{ onAdAmount }}" inputmode="decimal" style="width:100%;min-width:0;height:48px;border:1.5px solid #DCE2DE;border-radius:12px;padding:0 14px;font-size:16px;outline-color:#0F4D30;background:#fff"></label>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;min-width:0">Monthly cap (rewards)<input value="{{ ad.cap }}" onChange="{{ onAdCap }}" inputmode="numeric" style="width:100%;min-width:0;height:48px;border:1.5px solid #DCE2DE;border-radius:12px;padding:0 14px;font-size:16px;outline-color:#0F4D30;background:#fff"></label>
+      </div>
+      <sc-if value="{{ isLeadType }}" hint-placeholder-val="{{ false }}">
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700">Qualified lead criteria<input value="{{ ad.criteria }}" onChange="{{ onAdCriteria }}" placeholder="e.g. Homeowner within 25 miles requesting a quote" style="height:48px;border:1.5px solid #DCE2DE;border-radius:12px;padding:0 14px;font-size:16px;outline-color:#0F4D30;background:#fff"><span style="font-weight:500;color:#7A857E;font-size:12px">Leads meeting posted criteria can't be rejected later.</span></label>
+      </sc-if>
+      <div style="background:#062A19;color:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#E6BE62">Per verified result{{ calc.basis }}</div>
+        <div style="display:flex;justify-content:space-between;font-size:14px"><span style="color:#A9C4B3">You pay</span><b>{{ calc.reward }}</b></div>
+        <div style="display:flex;justify-content:space-between;font-size:14px"><span style="color:#A9C4B3">Member receives</span><b>{{ calc.member }}</b></div>
+        <div style="display:flex;justify-content:space-between;font-size:14px"><span style="color:#A9C4B3">MOLE fee ({{ calc.rate }})</span><b>{{ calc.fee }}</b></div>
+      </div>
+      <sc-if value="{{ calc.warn }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;line-height:1.45;color:#7A5614;background:#FBF1D9;padding:12px 14px;border-radius:12px">Rewards under $5 give members less than 80% after the $1.00 minimum fee. We recommend $5 or more.</div></sc-if>
+      </sc-if>
+    </sc-if>
+    <sc-if value="{{ adIs.s3 }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#fff;border-radius:16px;overflow:hidden">
+        <div style="height:110px;background:#6B2E22;background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.1) 0 8px,transparent 8px 16px);display:grid;place-items:center;color:rgba(255,255,255,.8);font:700 10px ui-monospace,Menlo,monospace;text-transform:uppercase">offer image</div>
+        <div style="padding:16px;display:flex;flex-direction:column;gap:6px">
+          <span style="font:400 22px 'DM Serif Display',serif;color:#0A3B24">{{ ad.name }}</span>
+          <span style="font-size:13px;color:#5E6B63">{{ ad.cat }}</span>
+          <span style="font-size:14px;line-height:1.5">{{ ad.desc }}</span>
+          <span style="align-self:flex-start;margin-top:4px;font-size:12px;font-weight:800;color:#7A5614;background:#FBF1D9;padding:4px 8px;border-radius:6px">{{ calc.badge }}</span>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;font-size:14px">
+        <div style="font-weight:800">Fund your Reward Wallet</div>
+        <div style="display:flex;justify-content:space-between"><span style="color:#5E6B63">Minimum deposit</span><b>{{ calc.deposit }}</b></div>
+        <div style="display:flex;justify-content:space-between"><span style="color:#5E6B63">Monthly cap</span><b>{{ ad.cap }} rewards</b></div>
+        <div style="font-size:12px;line-height:1.5;color:#7A857E">Listing is free. Rewards are drawn only on verified results; you have 7 days to approve or dispute. The offer pauses automatically if the wallet drops below one reward.</div>
+      </div>
+    </sc-if>
+  </div>
+  <div style="flex:none;padding:12px 20px {{ L.bottomPad }};background:#F6F5F0;border-top:1px solid #E3E7E4;display:flex;flex-direction:column;gap:8px">
+    <sc-if value="{{ hasAdErr }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;color:#B3261E;font-weight:600">{{ adErr }}</div></sc-if>
+    <button onClick="{{ adNext }}" style="height:52px;border:0;border-radius:14px;background:linear-gradient(180deg,#E6BE62,#BF8C2C);color:#062A19;font-size:16px;font-weight:800;cursor:pointer">{{ adCta }}</button>
+  </div>
+  </sc-if>
+
+  <!-- 9 SHARE & EARN -->
+  <sc-if value="{{ is.share }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A3B24;color:#fff;height:52px;flex:none;display:flex;align-items:center;padding:0 12px;gap:4px">
+    <button onClick="{{ back }}" aria-label="Back" style="width:44px;height:44px;border:0;background:none;color:#fff;cursor:pointer;display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+    <span style="font-size:17px;font-weight:700">Share &amp; Earn</span>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;padding:16px;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;gap:16px">
+    <div style="background:#fff;border-radius:16px;padding:12px;display:flex;gap:14px;align-items:center">
+      <div style="width:84px;height:84px;border-radius:12px;flex:none;background:{{ cur.tone }};background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.12) 0 6px,transparent 6px 12px)"></div>
+      <div style="display:flex;flex-direction:column;gap:3px">
+        <span style="font-size:16px;font-weight:800">{{ cur.name }}</span>
+        <span style="font-size:13px;color:#5E6B63;line-height:1.4">{{ cur.tagline }}</span>
+        <span style="font-size:13px;font-weight:800;color:#9A6E1C">{{ cur.reward }} · you get {{ cur.ex.member }}</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <span style="font-size:13px;font-weight:700">Pick a ready-made post</span>
+      <sc-for list="{{ posts }}" as="po" hint-placeholder-count="3">
+        <button onClick="{{ po.go }}" style="border:1.5px solid {{ po.bd }};background:{{ po.bg }};border-radius:14px;padding:12px 14px;text-align:left;cursor:pointer;font-size:14px;line-height:1.45;color:#10241A;display:flex;flex-direction:column;gap:6px"><span>{{ po.text }}</span><span style="font-size:12px;font-weight:800;color:#0F4D30">#ad – I may earn a reward</span></button>
+      </sc-for>
+      <button onClick="{{ copyPost }}" style="height:44px;border:1.5px solid #0A3B24;border-radius:12px;background:#fff;color:#0A3B24;font-weight:700;font-size:14px;cursor:pointer">Copy post with link</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <span style="font-size:13px;font-weight:700">Your referral link</span>
+      <div style="display:flex;gap:8px">
+        <div style="flex:1;min-width:0;height:50px;border:1.5px solid #DCE2DE;border-radius:12px;background:#fff;display:flex;align-items:center;padding:0 14px;font-size:14px;color:#10241A"><span style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">{{ link }}</span></div>
+        <button onClick="{{ copyLink }}" style="height:50px;padding:0 20px;border:0;border-radius:12px;background:#0A3B24;color:#fff;font-weight:800;font-size:14px;cursor:pointer">{{ copyLabel }}</button>
+      </div>
+      <span style="font-size:12px;color:#7A857E">In-person or phone sale? Give your code <b style="color:#0A3B24">{{ code }}</b>.</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-for list="{{ shareTargets }}" as="sh" hint-placeholder-count="5">
+        <button onClick="{{ sh.go }}" style="height:54px;border:0;border-radius:14px;background:#fff;display:flex;align-items:center;gap:14px;padding:0 16px;cursor:pointer;font-size:15px;font-weight:700;color:#10241A" style-hover="box-shadow:0 4px 14px rgba(6,42,25,.1)">
+          <span style="width:32px;height:32px;border-radius:9px;background:{{ sh.c }};color:#fff;display:grid;place-items:center;font-size:13px;font-weight:900">{{ sh.l }}</span>
+          <span style="flex:1;text-align:left">Share to {{ sh.name }}</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9AA49E" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"></path></svg>
+        </button>
+      </sc-for>
+    </div>
+    <div style="font-size:12px;line-height:1.5;color:#7A857E;text-wrap:pretty">Credit goes to the last member link used within 30 days (7 days for leads). Self-referrals don't earn.</div>
+  </div>
+  </sc-if>
+
+  <!-- 10 REFERRAL TRACKING -->
+  <sc-if value="{{ is.tracking }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A3B24;color:#fff;height:52px;flex:none;display:flex;align-items:center;padding:0 12px;gap:4px">
+    <button onClick="{{ back }}" aria-label="Back" style="width:44px;height:44px;border:0;background:none;color:#fff;cursor:pointer;display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+    <span style="font-size:17px;font-weight:700">Referral Tracking</span>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;padding:16px;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;gap:14px">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);background:#E6EAE6;border-radius:12px;padding:4px">
+      <sc-for list="{{ ranges }}" as="rg" hint-placeholder-count="3">
+        <button onClick="{{ rg.go }}" style="height:40px;border:0;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;background:{{ rg.bg }};color:{{ rg.fg }}">{{ rg.name }}</button>
+      </sc-for>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <sc-for list="{{ trackStats }}" as="ts" hint-placeholder-count="4">
+        <div style="background:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:4px"><span style="font-size:26px;font-weight:800;color:{{ ts.c }}">{{ ts.v }}</span><span style="font-size:13px;color:#5E6B63">{{ ts.label }}</span></div>
+      </sc-for>
+    </div>
+    <div style="font:400 20px 'DM Serif Display',serif;color:#0A3B24;margin-top:4px">Your referrals</div>
+    <sc-for list="{{ referrals }}" as="rf" hint-placeholder-count="4">
+      <div style="background:#fff;border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:700">{{ rf.t }}</span><span style="font-size:13px;color:#5E6B63">{{ rf.biz }}</span></div><span style="font-size:15px;font-weight:800;color:#0F4D30">{{ rf.amt }}</span></div>
+        <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px">
+          <sc-for list="{{ rf.stages }}" as="sg" hint-placeholder-count="5">
+            <div style="display:flex;flex-direction:column;gap:4px;min-width:0"><div style="height:4px;border-radius:2px;background:{{ sg.c }}"></div><span style="font-size:11px;font-weight:800;color:{{ sg.lc }}">{{ sg.n }}</span><span style="font-size:10.5px;color:#7A857E">{{ sg.d }}</span></div>
+          </sc-for>
+        </div>
+        <div style="font-size:12.5px;line-height:1.4;color:#5E6B63">{{ rf.note }}</div>
+      </div>
+    </sc-for>
+    <div style="font-size:12px;line-height:1.5;color:#7A857E;text-wrap:pretty">Share → Click → Action → Verify (7 days) → Hold → Paid. Undisputed results approve automatically.</div>
+  </div>
+  </sc-if>
+
+  <!-- 11 MY EARNINGS -->
+  <sc-if value="{{ is.earnings }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A3B24;color:#fff;flex:none;padding:4px 20px 24px;display:flex;flex-direction:column;gap:16px">
+    <div style="min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:12px"><span style="font-size:17px;font-weight:700">My Earnings</span><button onClick="{{ goTracking }}" style="height:44px;padding:0 14px;border:1px solid rgba(255,255,255,.3);border-radius:10px;background:none;color:#fff;font-size:13px;font-weight:700;cursor:pointer">Tracking</button></div>
+    <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;color:#A9C4B3;font-weight:600">Total earnings</span><span style="font:400 46px/1 'DM Serif Display',serif;color:#F3D489">$160.00</span></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+      <div style="background:rgba(255,255,255,.08);border-radius:12px;padding:10px 12px"><div style="font-size:18px;font-weight:800">$120</div><div style="font-size:12px;color:#A9C4B3">Pending</div></div>
+      <div style="background:rgba(255,255,255,.08);border-radius:12px;padding:10px 12px"><div style="font-size:18px;font-weight:800">$40</div><div style="font-size:12px;color:#A9C4B3">Approved</div></div>
+      <div style="background:rgba(255,255,255,.08);border-radius:12px;padding:10px 12px"><div style="font-size:18px;font-weight:800">$0</div><div style="font-size:12px;color:#A9C4B3">Paid</div></div>
+    </div>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;padding:16px;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;gap:12px">
+    <div style="background:#fff;border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;justify-content:space-between;gap:8px;font-size:14px"><b>Next payout · Nov 15</b><b style="color:#0F4D30">$40.00</b></div>
+      <div style="height:8px;border-radius:4px;background:#EEF0EE;overflow:hidden"><div style="height:100%;width:100%;background:#0F4D30"></div></div>
+      <button onClick="{{ goPayout }}" style="align-self:flex-start;border:0;background:none;padding:0;font-size:12px;font-weight:700;color:{{ payoutLineC }};cursor:pointer;text-align:left">{{ payoutLine }}</button>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <sc-for list="{{ earnFilters }}" as="f" hint-placeholder-count="4">
+        <button onClick="{{ f.go }}" style="height:44px;padding:0 16px;border-radius:22px;border:1.5px solid {{ f.bd }};background:{{ f.bg }};color:{{ f.fg }};font-size:13px;font-weight:700;cursor:pointer">{{ f.name }}</button>
+      </sc-for>
+    </div>
+    <div style="background:#fff;border-radius:16px;overflow:hidden">
+      <sc-for list="{{ earnList }}" as="e" hint-placeholder-count="6">
+        <div style="display:flex;gap:12px;padding:14px 16px;border-bottom:1px solid #EEF0EE;align-items:flex-start">
+          <div style="width:40px;height:40px;border-radius:12px;background:{{ e.tone }};flex:none"></div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-size:15px;font-weight:700">{{ e.biz }}</span><span style="font-size:12.5px;color:#5E6B63">{{ e.what }} · {{ e.d }}</span><span style="font-size:12px;font-weight:700;color:{{ e.sfg }}">{{ e.pays }}</span>
+            <sc-if value="{{ e.canDispute }}" hint-placeholder-val="{{ false }}"><button onClick="{{ e.dispute }}" style="align-self:flex-start;height:36px;margin-top:4px;padding:0 14px;border:1.5px solid #B3261E;border-radius:10px;background:#fff;color:#B3261E;font-size:13px;font-weight:700;cursor:pointer">{{ e.disputeLabel }}</button></sc-if>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px"><span style="font-size:15px;font-weight:800">{{ e.amt }}</span><span style="font-size:11px;font-weight:800;padding:2px 7px;border-radius:5px;background:{{ e.sbg }};color:{{ e.sfg }}">{{ e.status }}</span></div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="font-size:12px;line-height:1.5;color:#7A857E;text-wrap:pretty">Payouts go out on the 15th by direct deposit or digital wallet. Minimum $25; smaller balances roll forward. W-9 required before first payout.</div>
+  </div>
+  </sc-if>
+
+  <!-- 12 BUSINESS DASHBOARD -->
+  <sc-if value="{{ is.bizdash }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A3B24;color:#fff;flex:none;padding:4px 16px 14px;display:flex;flex-direction:column;gap:12px">
+    <div style="min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:12px"><div style="display:flex;flex-direction:column"><span style="font-size:17px;font-weight:700">Business Dashboard</span><span style="font-size:12px;color:#A9C4B3">HavSum Brownies</span></div><button onClick="{{ goPostAd }}" style="height:44px;padding:0 14px;border:0;border-radius:12px;background:linear-gradient(180deg,#E6BE62,#BF8C2C);color:#062A19;font-size:13px;font-weight:800;cursor:pointer">+ New offer</button></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);background:rgba(255,255,255,.1);border-radius:12px;padding:4px">
+      <sc-for list="{{ bdRanges }}" as="rg" hint-placeholder-count="3">
+        <button onClick="{{ rg.go }}" style="height:40px;border:0;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;background:{{ rg.bg }};color:{{ rg.fg }}">{{ rg.name }}</button>
+      </sc-for>
+    </div>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;padding:16px;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;gap:12px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <sc-for list="{{ bdStats }}" as="ts" hint-placeholder-count="4">
+        <div style="background:#fff;border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:2px"><span style="font-size:24px;font-weight:800;color:#0A3B24">{{ ts.v }}</span><span style="font-size:13px;color:#5E6B63">{{ ts.label }}</span></div>
+      </sc-for>
+    </div>
+    <button onClick="{{ goBizLeads }}" style="border:0;border-radius:16px;background:#fff;padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;text-align:left">
+      <span style="min-width:32px;height:32px;padding:0 8px;border-radius:16px;background:#E6BE62;color:#062A19;display:grid;place-items:center;font-weight:900;font-size:14px">{{ openLeads }}</span>
+      <span style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:800;color:#10241A">Referrals to review</span><span style="font-size:12.5px;color:#5E6B63">Approve or dispute within 7 days</span></span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9AA49E" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"></path></svg>
+    </button>
+    <div style="background:#fff;border-radius:16px;padding:16px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px">
+      <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:20px;font-weight:800;color:#0F4D30">{{ bd.paid }}</span><span style="font-size:12px;color:#5E6B63">Rewards paid</span></div>
+      <div style="display:flex;flex-direction:column;gap:2px;border-left:1px solid #EEF0EE;padding-left:10px"><span style="font-size:20px;font-weight:800;color:#9A6E1C">{{ bd.fee }}</span><span style="font-size:12px;color:#5E6B63">MOLE fee (incl.)</span></div>
+      <div style="display:flex;flex-direction:column;gap:2px;border-left:1px solid #EEF0EE;padding-left:10px"><span style="font-size:20px;font-weight:800;color:#0A3B24">{{ bd.cpc }}</span><span style="font-size:12px;color:#5E6B63">Cost per customer</span></div>
+    </div>
+    <div style="background:#062A19;color:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#E6BE62">Reward Wallet</span><span style="font-size:26px;font-weight:800">{{ walletStr }}</span></div><button onClick="{{ goWallet }}" style="height:44px;padding:0 16px;border:1.5px solid #E6BE62;border-radius:12px;background:none;color:#F3D489;font-weight:800;font-size:14px;cursor:pointer">Manage</button></div>
+      <div style="height:8px;border-radius:4px;background:rgba(255,255,255,.12);overflow:hidden"><div style="height:100%;width:24%;background:#E6BE62"></div></div>
+      <span style="font-size:12px;color:#A9C4B3">12 of 50 monthly rewards used · Offer pauses below one reward</span>
+      <sc-if value="{{ walletLow }}" hint-placeholder-val="{{ false }}"><div style="background:#FBF1D9;color:#5C410E;border-radius:10px;padding:10px 12px;font-size:13px;font-weight:700;line-height:1.4">Low balance — covers {{ walletCovers }} more rewards. Top up to keep your offer live.</div></sc-if>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px">
+      <span style="font:400 18px 'DM Serif Display',serif;color:#0A3B24">Best-converting offers</span>
+      <sc-for list="{{ bestOffers }}" as="bo" hint-placeholder-count="3">
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;justify-content:space-between;gap:8px;font-size:14px"><span style="font-weight:600">{{ bo.n }}</span><b>{{ bo.conv }}</b></div><div style="height:6px;border-radius:3px;background:#EEF0EE;overflow:hidden"><div style="height:100%;width:{{ bo.w }}%;background:{{ bo.c }}"></div></div></div>
+      </sc-for>
+      <span style="font-size:12px;color:#7A857E;line-height:1.45">Click-to-result rate. Raise rewards on what converts to get more members sharing it.</span>
+    </div>
+    <button onClick="{{ goAddons }}" style="border:1.5px dashed #C9A24A;border-radius:16px;background:#FBF6EA;padding:16px;display:flex;flex-direction:column;gap:4px;text-align:left;cursor:pointer"><span style="font-weight:800;font-size:15px;color:#0A3B24">Grow your reach</span><span style="font-size:13px;color:#5E6B63;line-height:1.45">Featured listings, sponsored offers and advanced analytics — coming in Phase 4.</span></button>
+    <div style="background:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:400 18px 'DM Serif Display',serif;color:#0A3B24">Link clicks</span><span style="font-size:12px;color:#7A857E">{{ bd.label }}</span></div>
+      <div style="height:120px;display:flex;align-items:flex-end;gap:3px">
+        <sc-for list="{{ bars }}" as="br" hint-placeholder-count="30">
+          <div style="flex:1;height:{{ br.h }}%;background:{{ br.c }};border-radius:3px 3px 0 0"></div>
+        </sc-for>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:#7A857E"><span>{{ bd.start }}</span><span>Today</span></div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- 13 CUSTOMER CONFIRMATION -->
+  <sc-if value="{{ is.confirm }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#fff;height:52px;flex:none;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #E3E7E4;font-weight:800;font-size:16px">HavSum Brownies</div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;padding:24px 20px 28px;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;gap:16px">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center">
+      <div style="width:64px;height:64px;border-radius:50%;background:#0F4D30;color:#fff;display:grid;place-items:center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></div>
+      <div style="font:400 28px/1.15 'DM Serif Display',serif;color:#0A3B24">Order confirmed</div>
+      <div style="font-size:14px;color:#5E6B63">Order #HB-20417 · Pickup Tue, Nov 3</div>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:6px 16px">
+      <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #EEF0EE;font-size:14px"><span>Party Box (24)</span><b>$48.00</b></div>
+      <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #EEF0EE;font-size:14px"><span>Red Velvet Granola (6)</span><b>$16.00</b></div>
+      <div style="display:flex;justify-content:space-between;padding:10px 0;font-size:15px"><b>Total</b><b>$64.00</b></div>
+      <div style="padding:0 0 10px;font-size:12px;color:#7A857E">Paid with Visa •• 4242 · Secured by Stripe</div>
+    </div>
+    <div style="font-size:13px;color:#5E6B63;text-align:center">Recommended to you by <b style="color:#10241A">{{ first }} {{ lastInitial }}</b> (shared with permission)</div>
+    <div style="background:#0A3B24;color:#fff;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:12px">
+      <div style="font:400 24px/1.15 'DM Serif Display',serif;color:#F3D489">Love HavSum?</div>
+      <div style="font-size:14px;line-height:1.5;color:#D7E3DB;text-wrap:pretty">Recommend it to friends and receive $1.00 every time one of them buys. Free to join — no fees, ever.</div>
+      <button onClick="{{ startFromConfirm }}" style="height:52px;border:0;border-radius:14px;background:linear-gradient(180deg,#E6BE62,#BF8C2C);color:#062A19;font-weight:800;cursor:pointer;font-size:16px">Recommend HavSum</button>
+      <button onClick="{{ noThanks }}" style="height:44px;border:0;background:none;color:#A9C4B3;font-weight:700;font-size:14px;cursor:pointer">No thanks</button>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- 14 PAYOUT SETUP -->
+  <sc-if value="{{ is.payout }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A3B24;color:#fff;height:52px;flex:none;display:flex;align-items:center;padding:0 12px;gap:4px">
+    <button onClick="{{ back }}" aria-label="Back" style="width:44px;height:44px;border:0;background:none;color:#fff;cursor:pointer;display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+    <span style="font-size:17px;font-weight:700">Payout setup</span>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;padding:16px;gap:14px">
+    <div style="background:#062A19;color:#fff;border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:8px">
+      <span style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#E6BE62">{{ stripe.kicker }}</span>
+      <span style="font:400 24px/1.2 'DM Serif Display',serif">{{ stripe.title }}</span>
+      <span style="font-size:13px;line-height:1.5;color:#A9C4B3">{{ stripe.sub }}</span>
+    </div>
+    <div style="background:#fff;border-radius:16px;overflow:hidden">
+      <sc-for list="{{ stripe.steps }}" as="sp" hint-placeholder-count="3">
+        <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid #EEF0EE">
+          <span style="width:28px;height:28px;border-radius:50%;background:{{ sp.bg }};color:{{ sp.fg }};border:2px solid {{ sp.bd }};display:grid;place-items:center;font-size:12px;font-weight:900;flex:none">{{ sp.mark }}</span>
+          <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:700">{{ sp.n }}</span><span style="font-size:12.5px;color:#5E6B63">{{ sp.d }}</span></div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:6px 16px">
+      <div style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;font-size:14px"><span style="color:#5E6B63">Payout schedule</span><b>Monthly on the 15th</b></div>
+      <div style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid #EEF0EE;font-size:14px"><span style="color:#5E6B63">Minimum payout</span><b>$25.00</b></div>
+      <div style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid #EEF0EE;font-size:14px"><span style="color:#5E6B63">Fees to you</span><b>None</b></div>
+    </div>
+    <div style="font-size:12px;line-height:1.5;color:#7A857E;text-wrap:pretty">MOLE uses Stripe Connect for identity checks, bank payouts and W-9 collection. MOLE never stores your full SSN or bank number. Stripe processing costs are paid from MOLE’s platform fee.</div>
+  </div>
+  <div style="flex:none;padding:12px 20px {{ L.bottomPad }};background:#F6F5F0;border-top:1px solid #E3E7E4;display:flex;flex-direction:column;gap:8px">
+    <button onClick="{{ stripe.go }}" style="width:100%;height:52px;border:0;border-radius:14px;background:linear-gradient(180deg,#E6BE62,#BF8C2C);color:#062A19;font-weight:800;cursor:pointer;font-size:16px">{{ stripe.cta }}</button>
+    <span style="text-align:center;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7A857E">Secured by Stripe</span>
+  </div>
+  </sc-if>
+
+  <!-- 15 EDIT PROFILE -->
+  <sc-if value="{{ is.editprofile }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A3B24;color:#fff;height:52px;flex:none;display:flex;align-items:center;padding:0 12px;gap:4px">
+    <button onClick="{{ back }}" aria-label="Back" style="width:44px;height:44px;border:0;background:none;color:#fff;cursor:pointer;display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+    <span style="font-size:17px;font-weight:700">Personal information</span>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;padding:16px;gap:14px">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:8px 0">
+      <div style="width:92px;height:92px;border-radius:50%;background:#0F4D30;color:#F3D489;display:grid;place-items:center;font:400 36px 'DM Serif Display',serif;border:3px solid #E6BE62">{{ initials }}</div>
+      <button onClick="{{ soonPhoto }}" style="height:44px;padding:0 18px;border:1.5px solid #0A3B24;border-radius:12px;background:#fff;color:#0A3B24;font-weight:700;cursor:pointer;font-size:14px">Change photo</button>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px">
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;min-width:0">Full name<input value="{{ fv.pName }}" onChange="{{ fh.pName }}" autocomplete="name" style="width:100%;min-width:0;height:48px;border:1.5px solid #DCE2DE;border-radius:12px;padding:0 14px;font-size:16px;outline-color:#0F4D30;background:#fff;color:#10241A"></label>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;min-width:0">Email<input value="{{ fv.pEmail }}" onChange="{{ fh.pEmail }}" type="email" autocomplete="email" style="width:100%;min-width:0;height:48px;border:1.5px solid #DCE2DE;border-radius:12px;padding:0 14px;font-size:16px;outline-color:#0F4D30;background:#fff;color:#10241A"></label>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;min-width:0">Mobile<input value="{{ fv.pPhone }}" onChange="{{ fh.pPhone }}" type="tel" autocomplete="tel" style="width:100%;min-width:0;height:48px;border:1.5px solid #DCE2DE;border-radius:12px;padding:0 14px;font-size:16px;outline-color:#0F4D30;background:#fff;color:#10241A"></label>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;min-width:0">City<input value="{{ fv.pCity }}" onChange="{{ fh.pCity }}"  style="width:100%;min-width:0;height:48px;border:1.5px solid #DCE2DE;border-radius:12px;padding:0 14px;font-size:16px;outline-color:#0F4D30;background:#fff;color:#10241A"></label>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700">Short bio<textarea value="{{ fv.pBio }}" onChange="{{ fh.pBio }}" rows="3" placeholder="What do friends ask you about?" style="width:100%;border:1.5px solid #DCE2DE;border-radius:12px;padding:12px 14px;font-size:16px;line-height:1.45;resize:none;outline-color:#0F4D30;background:#fff"></textarea></label>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7A857E">Interests</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <sc-for list="{{ interestOpts }}" as="io" hint-placeholder-count="6">
+          <button onClick="{{ io.go }}" style="height:44px;padding:0 14px;border-radius:22px;border:1.5px solid {{ io.bd }};background:{{ io.bg }};color:#10241A;font-size:13px;font-weight:700;cursor:pointer">{{ io.name }} {{ io.mark }}</button>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  <div style="flex:none;padding:12px 20px {{ L.bottomPad }};background:#F6F5F0;border-top:1px solid #E3E7E4"><button onClick="{{ saveProfile }}" style="width:100%;height:52px;border:0;border-radius:14px;background:linear-gradient(180deg,#E6BE62,#BF8C2C);color:#062A19;font-weight:800;cursor:pointer;font-size:16px">Save changes</button></div>
+  </sc-if>
+
+  <!-- 16 SOCIAL LINKS -->
+  <sc-if value="{{ is.social }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A3B24;color:#fff;height:52px;flex:none;display:flex;align-items:center;padding:0 12px;gap:4px">
+    <button onClick="{{ back }}" aria-label="Back" style="width:44px;height:44px;border:0;background:none;color:#fff;cursor:pointer;display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+    <span style="font-size:17px;font-weight:700">Social media links</span>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;padding:16px;gap:14px">
+    <div style="background:#fff;border-radius:16px;overflow:hidden">
+      <sc-for list="{{ socialRows }}" as="so" hint-placeholder-count="5">
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;min-height:64px;border-bottom:1px solid #EEF0EE">
+          <span style="width:36px;height:36px;border-radius:10px;background:{{ so.c }};color:#fff;display:grid;place-items:center;font-size:13px;font-weight:900;flex:none">{{ so.l }}</span>
+          <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:700">{{ so.name }}</span><span style="font-size:12.5px;color:#5E6B63">{{ so.sub }}</span></div>
+          <button onClick="{{ so.go }}" style="height:40px;padding:0 14px;border-radius:10px;border:1.5px solid {{ so.bd }};background:{{ so.bg }};color:{{ so.fg }};font-size:13px;font-weight:800;cursor:pointer;flex:none">{{ so.btn }}</button>
+        </div>
+      </sc-for>
+    </div>
+    <div style="font-size:12px;color:#7A857E;line-height:1.5">Linking only speeds up sharing. MOLE never reads your friend lists or treats follower counts as ad views.</div>
+  </div>
+  </sc-if>
+
+  <!-- 17 NOTIFICATION SETTINGS -->
+  <sc-if value="{{ is.notifsettings }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A3B24;color:#fff;height:52px;flex:none;display:flex;align-items:center;padding:0 12px;gap:4px">
+    <button onClick="{{ back }}" aria-label="Back" style="width:44px;height:44px;border:0;background:none;color:#fff;cursor:pointer;display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+    <span style="font-size:17px;font-weight:700">Notification settings</span>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;padding:16px;gap:14px">
+    <div style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7A857E">Referrals & payouts</div>
+    <div style="background:#fff;border-radius:16px;overflow:hidden">
+      <sc-for list="{{ notifRowsA }}" as="r" hint-placeholder-count="4">
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;min-height:64px;border-bottom:1px solid #EEF0EE"><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:700">{{ r.label }}</span><span style="font-size:12.5px;color:#5E6B63;line-height:1.35">{{ r.sub }}</span></div><button onClick="{{ r.go }}" role="switch" aria-label="Toggle" style="width:52px;height:32px;border-radius:16px;border:0;padding:3px;background:{{ r.bg }};cursor:pointer;flex:none;display:flex"><span style="width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transform:translateX({{ r.x }}px);transition:transform .2s"></span></button></div>
+      </sc-for>
+    </div>
+    <div style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7A857E">Business</div>
+    <div style="background:#fff;border-radius:16px;overflow:hidden">
+      <sc-for list="{{ notifRowsB }}" as="r" hint-placeholder-count="4">
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;min-height:64px;border-bottom:1px solid #EEF0EE"><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:700">{{ r.label }}</span><span style="font-size:12.5px;color:#5E6B63;line-height:1.35">{{ r.sub }}</span></div><button onClick="{{ r.go }}" role="switch" aria-label="Toggle" style="width:52px;height:32px;border-radius:16px;border:0;padding:3px;background:{{ r.bg }};cursor:pointer;flex:none;display:flex"><span style="width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transform:translateX({{ r.x }}px);transition:transform .2s"></span></button></div>
+      </sc-for>
+    </div>
+    <div style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7A857E">Delivery</div>
+    <div style="background:#fff;border-radius:16px;overflow:hidden">
+      <sc-for list="{{ notifRowsC }}" as="r" hint-placeholder-count="4">
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;min-height:64px;border-bottom:1px solid #EEF0EE"><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:700">{{ r.label }}</span><span style="font-size:12.5px;color:#5E6B63;line-height:1.35">{{ r.sub }}</span></div><button onClick="{{ r.go }}" role="switch" aria-label="Toggle" style="width:52px;height:32px;border-radius:16px;border:0;padding:3px;background:{{ r.bg }};cursor:pointer;flex:none;display:flex"><span style="width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transform:translateX({{ r.x }}px);transition:transform .2s"></span></button></div>
+      </sc-for>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- 18 PRIVACY & SECURITY -->
+  <sc-if value="{{ is.privacy }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A3B24;color:#fff;height:52px;flex:none;display:flex;align-items:center;padding:0 12px;gap:4px">
+    <button onClick="{{ back }}" aria-label="Back" style="width:44px;height:44px;border:0;background:none;color:#fff;cursor:pointer;display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+    <span style="font-size:17px;font-weight:700">Privacy & security</span>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;padding:16px;gap:14px">
+    <div style="background:#fff;border-radius:16px;overflow:hidden">
+      <sc-for list="{{ privRows }}" as="r" hint-placeholder-count="4">
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;min-height:64px;border-bottom:1px solid #EEF0EE"><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:700">{{ r.label }}</span><span style="font-size:12.5px;color:#5E6B63;line-height:1.35">{{ r.sub }}</span></div><button onClick="{{ r.go }}" role="switch" aria-label="Toggle" style="width:52px;height:32px;border-radius:16px;border:0;padding:3px;background:{{ r.bg }};cursor:pointer;flex:none;display:flex"><span style="width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transform:translateX({{ r.x }}px);transition:transform .2s"></span></button></div>
+      </sc-for>
+    </div>
+    <div style="background:#fff;border-radius:16px;overflow:hidden">
+      <sc-for list="{{ secActions }}" as="sa" hint-placeholder-count="3">
+        <button onClick="{{ sa.go }}" style="width:100%;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border:0;border-bottom:1px solid #EEF0EE;background:#fff;cursor:pointer;font-size:15px;font-weight:700;color:{{ sa.c }}">{{ sa.label }}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9AA49E" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"></path></svg></button>
+      </sc-for>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7A857E">How MOLE uses your data</div>
+      <div style="font-size:13px;line-height:1.55;color:#10241A;text-wrap:pretty">MOLE does not access private friend lists. A customer's contact details are shared with a business only when that customer submits an inquiry or purchase. Your earnings are never shown to your circle.</div>
+      <div style="font-size:11px;color:#9AA49E">Draft language — pending attorney review.</div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- 19 PROGRAM RULES -->
+  <sc-if value="{{ is.rules }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A3B24;color:#fff;height:52px;flex:none;display:flex;align-items:center;padding:0 12px;gap:4px">
+    <button onClick="{{ back }}" aria-label="Back" style="width:44px;height:44px;border:0;background:none;color:#fff;cursor:pointer;display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+    <span style="font-size:17px;font-weight:700">Program rules</span>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;padding:16px;gap:14px">
+    <div style="background:#062A19;color:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:6px"><span style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#E6BE62">Confirmed · Program v1.1</span><span style="font:400 22px/1.2 'DM Serif Display',serif">MOLE earns only when a business gets a verified result.</span></div>
+    <sc-for list="{{ ruleGroups }}" as="g" hint-placeholder-count="6">
+      <div style="background:#fff;border-radius:16px;padding:6px 16px 4px;display:flex;flex-direction:column">
+        <div style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7A857E;padding:10px 0 4px">{{ g.g }}</div>
+        <sc-for list="{{ g.rows }}" as="rw" hint-placeholder-count="3">
+          <div style="display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-top:1px solid #EEF0EE;font-size:13.5px"><span style="color:#5E6B63;flex:none;max-width:45%">{{ rw.k }}</span><span style="font-weight:700;text-align:right">{{ rw.v }}</span></div>
+        </sc-for>
+      </div>
+    </sc-for>
+    <div style="font-size:12px;color:#7A857E;line-height:1.5">Terms, disclosure language and restricted categories are pending attorney review in Georgia and each launch state.</div>
+  </div>
+  </sc-if>
+
+  <!-- 20 NOTIFICATIONS INBOX -->
+  <sc-if value="{{ is.inbox }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A3B24;color:#fff;height:52px;flex:none;display:flex;align-items:center;padding:0 12px;gap:4px">
+    <button onClick="{{ back }}" aria-label="Back" style="width:44px;height:44px;border:0;background:none;color:#fff;cursor:pointer;display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+    <span style="font-size:17px;font-weight:700;flex:1">Notifications</span>
+    <button onClick="{{ markAllRead }}" style="height:44px;padding:0 10px;border:0;background:none;color:#F3D489;font-size:13px;font-weight:700;cursor:pointer">Mark all read</button>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;padding:16px;gap:14px">
+    <div style="background:#fff;border-radius:16px;overflow:hidden">
+      <sc-for list="{{ inbox }}" as="n" hint-placeholder-count="5">
+        <button onClick="{{ n.go }}" style="width:100%;display:flex;gap:12px;padding:14px 16px;border:0;border-bottom:1px solid #EEF0EE;background:{{ n.bg }};text-align:left;cursor:pointer;align-items:flex-start">
+          <span style="width:10px;height:10px;border-radius:50%;background:{{ n.dot }};margin-top:6px;flex:none"></span>
+          <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:800;color:#10241A">{{ n.t }}</span><span style="font-size:13px;line-height:1.4;color:#5E6B63">{{ n.b }}</span></div>
+          <span style="font-size:12px;color:#7A857E;flex:none">{{ n.d }}</span>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- 21 BUSINESS: REFERRALS TO REVIEW -->
+  <sc-if value="{{ is.bizleads }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A3B24;color:#fff;height:52px;flex:none;display:flex;align-items:center;padding:0 12px;gap:4px">
+    <button onClick="{{ back }}" aria-label="Back" style="width:44px;height:44px;border:0;background:none;color:#fff;cursor:pointer;display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+    <span style="font-size:17px;font-weight:700">Referrals to review</span>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;padding:16px;gap:14px">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);background:#E6EAE6;border-radius:12px;padding:4px">
+      <sc-for list="{{ leadFilters }}" as="lf" hint-placeholder-count="3">
+        <button onClick="{{ lf.go }}" style="height:40px;border:0;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;background:{{ lf.bg }};color:{{ lf.fg }}">{{ lf.name }}</button>
+      </sc-for>
+    </div>
+    <div style="padding:12px 14px;border-radius:14px;background:#FBF1D9;font-size:13px;line-height:1.5;color:#5C410E">You have 7 days to approve or dispute. Results not disputed are approved automatically.</div>
+    <sc-for list="{{ leads }}" as="ld" hint-placeholder-count="4">
+      <div style="background:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start">
+          <div style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9A6E1C">{{ ld.kind }}</span><span style="font-size:15px;font-weight:800">{{ ld.who }}</span><span style="font-size:13px;color:#5E6B63">{{ ld.detail }}</span></div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex:none"><span style="font-size:16px;font-weight:800">{{ ld.rewardStr }}</span><span style="font-size:11px;color:#7A857E">reward</span></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:8px;font-size:12.5px;color:#5E6B63"><span>Referred by <b style="color:#10241A">{{ ld.by }}</b></span><span style="font-weight:700;color:{{ ld.dueC }}">{{ ld.dueStr }}</span></div>
+        <sc-if value="{{ ld.open }}" hint-placeholder-val="{{ true }}">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><button onClick="{{ ld.dispute }}" style="height:44px;border:1.5px solid #B3261E;border-radius:12px;background:#fff;color:#B3261E;font-weight:700;font-size:14px;cursor:pointer">Dispute</button><button onClick="{{ ld.approve }}" style="height:44px;border:0;border-radius:14px;background:linear-gradient(180deg,#E6BE62,#BF8C2C);color:#062A19;font-weight:800;cursor:pointer;border-radius:12px;font-size:14px">Approve</button></div>
+        </sc-if>
+        <sc-if value="{{ ld.closed }}" hint-placeholder-val="{{ false }}"><span style="align-self:flex-start;font-size:12px;font-weight:800;padding:4px 10px;border-radius:6px;background:{{ ld.sbg }};color:{{ ld.sfg }}">{{ ld.status }}</span></sc-if>
+      </div>
+    </sc-for>
+  </div>
+  </sc-if>
+
+  <!-- 22 REWARD WALLET -->
+  <sc-if value="{{ is.wallet }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A3B24;color:#fff;height:52px;flex:none;display:flex;align-items:center;padding:0 12px;gap:4px">
+    <button onClick="{{ back }}" aria-label="Back" style="width:44px;height:44px;border:0;background:none;color:#fff;cursor:pointer;display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+    <span style="font-size:17px;font-weight:700">Reward Wallet</span>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;padding:16px;gap:14px">
+    <div style="background:#062A19;color:#fff;border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px">
+      <span style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#E6BE62">Available balance</span>
+      <span style="font:400 40px/1 'DM Serif Display',serif;color:#F3D489">{{ walletStr }}</span>
+      <span style="font-size:13px;color:#A9C4B3">$6.00 held for pending rewards · covers {{ walletCovers }} more $2 rewards</span>
+      <sc-if value="{{ walletLow }}" hint-placeholder-val="{{ false }}"><div style="background:#FBF1D9;color:#5C410E;border-radius:10px;padding:10px 12px;font-size:13px;font-weight:700">Low balance. Your offer pauses automatically below one reward.</div></sc-if>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7A857E">Add funds</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+        <sc-for list="{{ depositOpts }}" as="dp" hint-placeholder-count="3">
+          <button onClick="{{ dp.go }}" style="height:48px;border-radius:12px;border:1.5px solid {{ dp.bd }};background:{{ dp.bg }};font-size:16px;font-weight:800;color:#10241A;cursor:pointer">{{ dp.label }}</button>
+        </sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <sc-for list="{{ fundMethods }}" as="fm2" hint-placeholder-count="2">
+          <button onClick="{{ fm2.go }}" style="min-height:60px;padding:10px 12px;border-radius:12px;border:1.5px solid {{ fm2.bd }};background:{{ fm2.bg }};text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:800;color:#10241A">{{ fm2.name }}</span><span style="font-size:11.5px;color:#5E6B63">{{ fm2.sub }}</span></button>
+        </sc-for>
+      </div>
+      <button onClick="{{ addFunds }}" style="height:50px;border:0;border-radius:14px;background:linear-gradient(180deg,#E6BE62,#BF8C2C);color:#062A19;font-weight:800;cursor:pointer;font-size:15px">Add {{ depositStr }}</button>
+      <span style="font-size:12px;color:#7A857E;line-height:1.5">Processed by Stripe. You’re charged exactly the deposit — processing costs come out of MOLE’s fee. Minimum deposit is $50 or five rewards.</span>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7A857E">Monthly cap</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+        <button onClick="{{ capDown }}" aria-label="Decrease" style="width:48px;height:48px;border:1.5px solid #0A3B24;border-radius:12px;background:#fff;color:#0A3B24;font-weight:700;cursor:pointer;font-size:22px">−</button>
+        <div style="display:flex;flex-direction:column;align-items:center"><span style="font-size:24px;font-weight:800">{{ cap }}</span><span style="font-size:12px;color:#5E6B63">rewards per month</span></div>
+        <button onClick="{{ capUp }}" aria-label="Increase" style="width:48px;height:48px;border:1.5px solid #0A3B24;border-radius:12px;background:#fff;color:#0A3B24;font-weight:700;cursor:pointer;font-size:22px">+</button>
+      </div>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7A857E">Recent activity</div><button onClick="{{ withdraw }}" style="height:40px;padding:0 12px;border:1.5px solid #0A3B24;border-radius:12px;background:#fff;color:#0A3B24;font-weight:700;cursor:pointer;font-size:13px">Withdraw unused</button></div>
+      <sc-for list="{{ txns }}" as="tx" hint-placeholder-count="3">
+        <div style="display:flex;justify-content:space-between;gap:12px;font-size:14px;padding-top:10px;border-top:1px solid #EEF0EE"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">{{ tx.t }}</span><span style="font-size:12px;color:#7A857E">{{ tx.d }}</span></div><b style="color:{{ tx.c }}">{{ tx.a }}</b></div>
+      </sc-for>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- 23 DISPUTE -->
+  <sc-if value="{{ is.dispute }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A3B24;color:#fff;height:52px;flex:none;display:flex;align-items:center;padding:0 12px;gap:4px">
+    <button onClick="{{ back }}" aria-label="Back" style="width:44px;height:44px;border:0;background:none;color:#fff;cursor:pointer;display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+    <span style="font-size:17px;font-weight:700">Dispute a reward</span>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;padding:16px;gap:14px">
+    <div style="background:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;gap:12px"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:800">CleanTech Services</span><span style="font-size:13px;color:#5E6B63">Qualified lead · rejected Oct 11</span></div><b style="font-size:16px">$20.00</b></div>
+      <div style="font-size:13px;line-height:1.5;padding:10px 12px;border-radius:10px;background:#F6F5F0"><b>Business reason:</b> “Outside service area.” Posted criteria: homeowner within 25 miles requesting a quote.</div>
+    </div>
+    <sc-if value="{{ notDisputed }}" hint-placeholder-val="{{ true }}">
+      <div style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7A857E">Why should this be approved?</div>
+      <div style="background:#fff;border-radius:16px;overflow:hidden">
+        <sc-for list="{{ dispReasons }}" as="dr" hint-placeholder-count="4">
+          <button onClick="{{ dr.go }}" style="width:100%;min-height:52px;display:flex;align-items:center;gap:12px;padding:0 16px;border:0;border-bottom:1px solid #EEF0EE;background:#fff;cursor:pointer;text-align:left;font-size:15px;font-weight:600;color:#10241A"><span style="width:22px;height:22px;border-radius:50%;border:2px solid {{ dr.bd }};display:grid;place-items:center;flex:none"><span style="width:10px;height:10px;border-radius:50%;background:{{ dr.dot }}"></span></span>{{ dr.name }}</button>
+        </sc-for>
+      </div>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700">Details<textarea value="{{ fv.dDetails }}" onChange="{{ fh.dDetails }}" rows="3" placeholder="e.g. Customer lives 14 miles away and requested a quote on Oct 9." style="width:100%;border:1.5px solid #DCE2DE;border-radius:12px;padding:12px 14px;font-size:16px;line-height:1.45;resize:none;outline-color:#0F4D30;background:#fff"></textarea></label>
+      <div style="height:84px;border:1.5px dashed #C9CFCB;border-radius:12px;background:#fff;display:grid;place-items:center;font:600 12px ui-monospace,Menlo,monospace;color:#7A857E">Attach screenshot or receipt</div>
+      <div style="font-size:12px;color:#7A857E;line-height:1.5">MOLE reviews the posted criteria, tracking records and your evidence, and issues a final decision within 14 days.</div>
+    </sc-if>
+    <sc-if value="{{ disputedNow }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7A857E">Dispute status</div>
+        <sc-for list="{{ dispTimeline }}" as="dt" hint-placeholder-count="3">
+          <div style="display:flex;gap:12px;align-items:center"><span style="width:24px;height:24px;border-radius:50%;background:{{ dt.bg }};color:#fff;display:grid;place-items:center;font-size:12px;font-weight:900;flex:none">{{ dt.mark }}</span><div style="display:flex;flex-direction:column"><span style="font-size:14px;font-weight:700">{{ dt.n }}</span><span style="font-size:12px;color:#7A857E">{{ dt.d }}</span></div></div>
+        </sc-for>
+      </div>
+    </sc-if>
+  </div>
+  <sc-if value="{{ notDisputed }}" hint-placeholder-val="{{ true }}"><div style="flex:none;padding:12px 20px {{ L.bottomPad }};background:#F6F5F0;border-top:1px solid #E3E7E4"><button onClick="{{ submitDispute }}" style="width:100%;height:52px;border:0;border-radius:14px;background:linear-gradient(180deg,#E6BE62,#BF8C2C);color:#062A19;font-weight:800;cursor:pointer;font-size:16px">Submit dispute</button></div></sc-if>
+  </sc-if>
+
+  <!-- 24 GROW (PHASE 4 ADD-ONS) -->
+  <sc-if value="{{ is.addons }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A3B24;color:#fff;height:52px;flex:none;display:flex;align-items:center;padding:0 12px;gap:4px">
+    <button onClick="{{ back }}" aria-label="Back" style="width:44px;height:44px;border:0;background:none;color:#fff;cursor:pointer;display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+    <span style="font-size:17px;font-weight:700">Grow your reach</span>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;padding:16px;gap:14px">
+    <div style="font-size:14px;line-height:1.5;color:#5E6B63">Optional add-ons. Never required to list or run offers. Pricing is set after Phase 3 results.</div>
+    <sc-for list="{{ addons }}" as="ao" hint-placeholder-count="3">
+      <div style="background:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><span style="font-size:16px;font-weight:800">{{ ao.n }}</span><span style="font-size:11px;font-weight:800;padding:3px 8px;border-radius:6px;background:#FBF1D9;color:#7A5614">Phase 4</span></div>
+        <span style="font-size:14px;line-height:1.5;color:#5E6B63">{{ ao.d }}</span>
+        <button onClick="{{ ao.go }}" style="height:44px;border-radius:12px;border:1.5px solid #0A3B24;background:{{ ao.bg }};color:{{ ao.fg }};font-weight:800;font-size:14px;cursor:pointer">{{ ao.btn }}</button>
+      </div>
+    </sc-for>
+  </div>
+  </sc-if>
+
+  <!-- 25 STAFF CONSOLE -->
+  <sc-if value="{{ is.admin }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#062A19;color:#fff;height:52px;flex:none;display:flex;align-items:center;padding:0 12px;gap:4px">
+    <button onClick="{{ back }}" aria-label="Back" style="width:44px;height:44px;border:0;background:none;color:#fff;cursor:pointer;display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+    <span style="font-size:17px;font-weight:700">MOLE Staff Console</span>
+  </div>
+  <div style="background:#062A19;flex:none;display:flex;gap:8px;padding:0 16px 12px;overflow-x:auto">
+    <sc-for list="{{ adminTabs }}" as="at" hint-placeholder-count="5">
+      <button onClick="{{ at.go }}" style="flex:none;height:40px;padding:0 14px;border-radius:20px;border:1.5px solid {{ at.bd }};background:{{ at.bg }};color:{{ at.fg }};font-size:13px;font-weight:800;cursor:pointer">{{ at.name }}</button>
+    </sc-for>
+  </div>
+  <div style="flex:1;min-height:0;overscroll-behavior:contain;overflow-y:auto;display:grid;align-content:start;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;padding:16px;gap:14px">
+    <sc-if value="{{ adminIs.list }}" hint-placeholder-val="{{ true }}">
+      <div style="font-size:13px;color:#5E6B63">{{ adminHint }}</div>
+      <sc-for list="{{ adminItems }}" as="ai" hint-placeholder-count="3">
+        <div style="background:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:800">{{ ai.n }}</span><span style="font-size:13px;line-height:1.4;color:#5E6B63">{{ ai.s }}</span></div>
+          <sc-if value="{{ ai.open }}" hint-placeholder-val="{{ true }}"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><button onClick="{{ ai.a2 }}" style="height:44px;border:1.5px solid #0A3B24;border-radius:12px;background:#fff;color:#0A3B24;font-weight:700;cursor:pointer;font-size:13px">{{ ai.l2 }}</button><button onClick="{{ ai.a1 }}" style="height:44px;border:0;border-radius:12px;background:#0A3B24;color:#fff;font-weight:800;font-size:13px;cursor:pointer">{{ ai.l1 }}</button></div></sc-if>
+          <sc-if value="{{ ai.closed }}" hint-placeholder-val="{{ false }}"><span style="align-self:flex-start;font-size:12px;font-weight:800;padding:4px 10px;border-radius:6px;background:{{ ai.sbg }};color:{{ ai.sfg }}">{{ ai.status }}</span></sc-if>
+        </div>
+      </sc-for>
+    </sc-if>
+    <sc-if value="{{ adminIs.payouts }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#062A19;color:#fff;border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#E6BE62">Nov 15 payout batch</span><span style="font:400 36px/1 'DM Serif Display',serif;color:#F3D489">$6,480.00</span><span style="font-size:13px;color:#A9C4B3">142 members · Stripe Connect standard payouts</span></div>
+      <div style="background:#fff;border-radius:16px;padding:6px 16px">
+        <div style="display:flex;justify-content:space-between;padding:10px 0;font-size:14px"><span style="color:#5E6B63">Below $25 — roll forward</span><b>18 members</b></div>
+        <div style="display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid #EEF0EE;font-size:14px"><span style="color:#5E6B63">Missing W-9 — on hold</span><b style="color:#B3261E">3 members</b></div>
+        <div style="display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid #EEF0EE;font-size:14px"><span style="color:#5E6B63">Open disputes in batch</span><b>0</b></div>
+        <div style="display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid #EEF0EE;font-size:14px"><span style="color:#5E6B63">MOLE fee retained</span><b>$1,512.00</b></div>
+        <div style="display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid #EEF0EE;font-size:14px"><span style="color:#5E6B63">Est. Stripe payout fees</span><b>−$51.70</b></div>
+        <div style="display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid #EEF0EE;font-size:14px"><span style="color:#5E6B63">Stripe active-account fees</span><b>−$284.00</b></div>
+        <div style="display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid #EEF0EE;font-size:14px"><span style="color:#5E6B63">Net to MOLE (before card/ACH costs)</span><b style="color:#0F4D30">$1,176.30</b></div>
+      </div>
+      <button onClick="{{ approveBatch }}" style="height:52px;border:0;border-radius:14px;background:linear-gradient(180deg,#E6BE62,#BF8C2C);color:#062A19;font-weight:800;cursor:pointer;font-size:16px">{{ batchLabel }}</button>
+    </sc-if>
+    <sc-if value="{{ adminIs.cats }}" hint-placeholder-val="{{ false }}">
+      <div style="font-size:13px;color:#5E6B63;line-height:1.5">Rewards stay off until an attorney confirms the arrangement is permitted. Businesses in these categories can still list.</div>
+      <div style="background:#fff;border-radius:16px;overflow:hidden">
+      <sc-for list="{{ catRows }}" as="r" hint-placeholder-count="4">
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;min-height:64px;border-bottom:1px solid #EEF0EE"><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:700">{{ r.label }}</span><span style="font-size:12.5px;color:#5E6B63;line-height:1.35">{{ r.sub }}</span></div><button onClick="{{ r.go }}" role="switch" aria-label="Toggle" style="width:52px;height:32px;border-radius:16px;border:0;padding:3px;background:{{ r.bg }};cursor:pointer;flex:none;display:flex"><span style="width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transform:translateX({{ r.x }}px);transition:transform .2s"></span></button></div>
+      </sc-for>
+    </div>
+    </sc-if>
+  </div>
+  </sc-if>
+
+  <!-- TAB BAR -->
+  <sc-if value="{{ showTabs }}" hint-placeholder-val="{{ false }}">
+  <div style="flex:none;background:#fff;border-top:1px solid #E3E7E4;display:grid;grid-template-columns:repeat(5,1fr);padding:6px max(4px,env(safe-area-inset-right)) {{ L.bottomPad }} max(4px,env(safe-area-inset-left))">
+    <button onClick="{{ tabGo.home }}" style="height:50px;border:0;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;color:{{ tab.home }};font-size:10.5px;font-weight:700"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"></path></svg>Home</button>
+    <button onClick="{{ tabGo.network }}" style="height:50px;border:0;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;color:{{ tab.network }};font-size:10.5px;font-weight:700"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"></path><circle cx="17" cy="9" r="2.5"></circle><path d="M17.5 14.5c2 .3 3.5 1.8 4 4.5"></path></svg>Network</button>
+    <button onClick="{{ tabGo.market }}" style="height:50px;border:0;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;color:{{ tab.market }};font-size:10.5px;font-weight:700"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9l1.5-5h13L20 9M4 9h16M4 9v11h16V9M9 20v-6h6v6"></path></svg>Marketplace</button>
+    <button onClick="{{ tabGo.earnings }}" style="height:50px;border:0;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;color:{{ tab.earnings }};font-size:10.5px;font-weight:700"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="6" width="18" height="14" rx="3"></rect><path d="M3 10h18M16 15h2"></path></svg>Earnings</button>
+    <button onClick="{{ tabGo.more }}" style="height:50px;border:0;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;color:{{ tab.more }};font-size:10.5px;font-weight:700"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"></path></svg>Profile</button>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ L.frame }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:{{ homeBar }}"></div></sc-if>
+  <sc-if value="{{ sheet }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:flex-end">
+      <button onClick="{{ closeSheet }}" aria-label="Close" style="flex:1;border:0;background:rgba(6,42,25,.45);cursor:pointer"></button>
+      <div style="background:#fff;border-radius:24px 24px 0 0;padding:10px 20px {{ L.bottomPad }};display:flex;flex-direction:column;gap:14px">
+        <div style="width:40px;height:5px;border-radius:3px;background:#DCE2DE;align-self:center"></div>
+        <div style="font:400 22px 'DM Serif Display',serif;color:#0A3B24">Sort &amp; filter</div>
+        <div style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7A857E">Sort by</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+          <sc-for list="{{ sortOpts }}" as="so" hint-placeholder-count="3"><button onClick="{{ so.go }}" style="height:44px;border-radius:12px;border:1.5px solid {{ so.bd }};background:{{ so.bg }};color:{{ so.fg }};font-size:13px;font-weight:800;cursor:pointer">{{ so.name }}</button></sc-for>
+        </div>
+        <div style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7A857E">Distance</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+          <sc-for list="{{ radiusOpts }}" as="ro" hint-placeholder-count="3"><button onClick="{{ ro.go }}" style="height:44px;border-radius:12px;border:1.5px solid {{ ro.bd }};background:{{ ro.bg }};color:{{ ro.fg }};font-size:13px;font-weight:800;cursor:pointer">{{ ro.name }}</button></sc-for>
+        </div>
+        <button onClick="{{ closeSheet }}" style="height:52px;border:0;border-radius:14px;background:linear-gradient(180deg,#E6BE62,#BF8C2C);color:#062A19;font-weight:800;cursor:pointer;font-size:16px">Show {{ bizCount }}</button>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;bottom:110px;left:50%;transform:translateX(-50%);background:#062A19;color:#fff;padding:12px 18px;border-radius:14px;font-size:14px;font-weight:700;max-width:calc(100% - 32px);text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.25);animation:moleToast .2s ease-out;z-index:6">{{ toast }}</div>
+  </sc-if>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;memberName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Cary Parker&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showScreenIndex&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;enforceMinReward&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;startScreen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;welcome&quot;,&quot;options&quot;:[&quot;welcome&quot;,&quot;auth&quot;,&quot;onboard&quot;,&quot;dashboard&quot;,&quot;marketplace&quot;,&quot;share&quot;,&quot;tracking&quot;,&quot;earnings&quot;,&quot;bizdash&quot;,&quot;bizleads&quot;,&quot;wallet&quot;,&quot;payout&quot;,&quot;rules&quot;,&quot;admin&quot;,&quot;confirm&quot;],&quot;tsType&quot;:&quot;string&quot;}}">
+const G9='#062A19',G8='#0A3B24',G7='#0F4D30',GOLD='#C08E2E',MUTE='#7A857E';
+const money=n=>'$'+n.toFixed(2);
+const feeFor=r=>{const rate=r<=100?.2:r<=500?.15:.1;const f=Math.max(r*rate,1);return {fee:Math.min(f,r),member:Math.max(r-f,0),rate,min:r*rate<1};};
+const BIZ=[
+ {id:'havsum',name:'HavSum Brownies',type:'Bakery & Desserts',cat:'Food',tone:'#6B2E22',kind:'fixed',amt:2,reward:'Earn $2 per sale',rewardType:'Fixed reward per qualifying purchase',offerText:'Share this offer and earn when a referred customer makes a qualifying purchase within 30 days.',rating:'4.8',reviews:24,tagline:'Chocolate and red velvet brownies with granola crust.',about:'Small-batch brownies baked fresh every morning — chocolate, red velvet and seasonal flavors, all with our signature granola crust.',hours:'Tue–Sat, 8am–6pm',area:'Pickup & local delivery',products:[{n:'Classic Chocolate (6)',p:'$14'},{n:'Red Velvet Granola (6)',p:'$16'},{n:'Party Box (24)',p:'$48'}]},
+ {id:'cleantech',name:'CleanTech Services',type:'Home Services',cat:'Home',tone:'#2F5E6E',kind:'lead',amt:25,reward:'Earn $25 per lead',rewardType:'Per qualified lead',offerText:'Qualified lead: a homeowner within 25 miles who requests a quote. Leads meeting these criteria can’t be rejected later.',rating:'4.7',reviews:58,tagline:'Eco-friendly home and office cleaning.',about:'Licensed, insured, eco-certified cleaning crews for homes and small offices.',hours:'Mon–Sat, 7am–7pm',area:'Within 25 miles',products:[{n:'Standard home clean',p:'from $120'},{n:'Deep clean',p:'from $240'},{n:'Office plan (monthly)',p:'Quote'}]},
+ {id:'parker',name:'Parker Consulting',type:'Business Consulting',cat:'Services',tone:'#3A4A3F',kind:'pct',amt:10,ex:2500,reward:'Earn 10% per sale',rewardType:'Percentage of eligible sale',offerText:'Earn 10% of the eligible engagement amount (excluding tax and refunds) when a referred client signs.',rating:'4.9',reviews:17,tagline:'Strategy and operations for growing businesses.',about:'Strategy, operations and finance consulting for owners scaling from 5 to 50 employees.',hours:'By appointment',area:'Remote & on-site',products:[{n:'Growth assessment',p:'$1,200'},{n:'Quarterly advisory',p:'$2,500'},{n:'Ops overhaul',p:'Quote'}]},
+ {id:'fitlife',name:'FitLife Wellness',type:'Health & Fitness',cat:'Health',tone:'#2E6B4A',kind:'signup',amt:15,reward:'Earn $15 per sign-up',rewardType:'Per sign-up or appointment',offerText:'Earn when a referred customer enrolls in a membership or attends a first scheduled session.',rating:'4.6',reviews:91,tagline:'Personal training, classes and recovery.',about:'Small-group classes, personal training and recovery services in a friendly neighborhood studio.',hours:'Daily, 5am–10pm',area:'Two locations',products:[{n:'Monthly membership',p:'$59'},{n:'Personal training (4)',p:'$220'},{n:'Recovery session',p:'$45'}]},
+ {id:'crown',name:'Crown Thread Co.',type:'Apparel & Accessories',cat:'Retail',tone:'#8A6A2A',kind:'fixed',amt:5,reward:'Earn $5 per sale',rewardType:'Fixed reward per qualifying purchase',offerText:'Earn on any qualifying online or in-store purchase within 30 days of your referral.',rating:'4.5',reviews:33,tagline:'Locally designed tees, hats and goods.',about:'Locally designed apparel printed in small runs.',hours:'Daily, 10am–8pm',area:'Online & downtown shop',products:[{n:'Signature tee',p:'$32'},{n:'Structured cap',p:'$28'},{n:'Tote',p:'$18'}]}
+];
+const EXTRA={havsum:{rel:'99%',isNew:false,unit:'sale',qual:'Any completed purchase',first:'No'},cleantech:{rel:'97%',isNew:false,unit:'lead',qual:'Homeowner within 25 mi requesting a quote',first:'Yes'},parker:{rel:'100%',isNew:false,unit:'sale',qual:'Signed engagement, excl. tax & refunds',first:'Yes'},fitlife:{rel:'98%',isNew:true,unit:'sign-up',qual:'Enrollment or attended first session',first:'Yes'},crown:{rel:'96%',isNew:true,unit:'sale',qual:'Online or in-store purchase',first:'No'}};
+BIZ.forEach(b=>Object.assign(b,EXTRA[b.id]));
+const INTERESTS={'Food':'Food','Home Services':'Home','Fitness':'Health','Beauty & Wellness':'Health','Business Help':'Services','Shopping':'Retail'};
+const SCREENS=[['welcome','Welcome'],['auth','Join / Login'],['onboard','Onboarding'],['profile','My Profile'],['dashboard','Dashboard'],['network','My Network'],['marketplace','Marketplace'],['bizprofile','Business Profile'],['postad','Post an Offer'],['share','Share & Earn'],['tracking','Referral Tracking'],['earnings','My Earnings'],['bizdash','Business Dashboard'],['confirm','Customer Confirmation'],['payout','Payout Setup'],['editprofile','Personal Information'],['social','Social Links'],['notifsettings','Notification Settings'],['privacy','Privacy & Security'],['rules','Program Rules'],['inbox','Notifications'],['bizleads','Referrals to Review'],['wallet','Reward Wallet'],['dispute','Dispute a Reward'],['addons','Grow (Phase 4)'],['admin','Staff Console']];
+const NUMS=['01','02','2b','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25'];
+const DIST={havsum:2.1,cleantech:6.4,parker:11.2,fitlife:3.2,crown:1.4};
+const LEADS=[{id:'l1',kind:'Sale',who:'Order #HB-20431',detail:'Party Box (24) · $48.00',by:'Cary P.',reward:2,due:'Oct 26',left:'3 days left'},{id:'l2',kind:'Sale',who:'Order #HB-20428',detail:'Classic Chocolate (6) · $14.00',by:'Tonya W.',reward:2,due:'Oct 25',left:'2 days left'},{id:'l3',kind:'Lead',who:'Catering inquiry — J. Morales',detail:'Office party, 40 people, Nov 20',by:'Angela S.',reward:5,due:'Oct 27',left:'4 days left'},{id:'l4',kind:'Sale',who:'Order #HB-20419',detail:'Red Velvet Granola (6) · $16.00',by:'Marcus G.',reward:2,due:'Oct 24',left:'1 day left'}];
+const INBOX=[{id:'n1',t:'Referral verified',b:'HavSum Brownies verified your brownie order. +$1.00 pending.',d:'2h',go:'tracking'},{id:'n2',t:'Payout scheduled',b:'$40.00 will be sent on Nov 15.',d:'Yesterday',go:'earnings'},{id:'n3',t:'New offer for you',b:'FitLife Wellness — you earn $12.00 per sign-up.',d:'Oct 21',go:'bizprofile',biz:'fitlife'},{id:'n4',t:'Lead awaiting review',b:'CleanTech has until Oct 26 to verify your referral.',d:'Oct 19',go:'tracking'},{id:'n5',t:'Add payout details',b:'Needed before your first payout on Nov 15.',d:'Oct 18',go:'payout'}];
+const RULES=[{g:'Platform fee',rows:[['Rewards up to $100','20% MOLE · 80% member'],['$100.01 – $500','15% MOLE · 85% member'],['Over $500','10% MOLE · 90% member'],['Minimum fee','$1.00 per verified reward']]},
+ {g:'Rewards',rows:[['Minimum reward','$5.00 per offer'],['Reward types','Per sale, % of sale, per lead, per sign-up'],['Who pays','Businesses fund rewards. Members never pay.']]},
+ {g:'Timing',rows:[['Referral window','30 days (7 days for leads)'],['Business review','7 days, then auto-approved'],['Holding period','30 days (14 days for leads)']]},
+ {g:'Payouts',rows:[['Minimum payout','$25.00 — smaller balances roll forward'],['Payout date','The 15th of each month'],['Methods','Direct deposit (ACH) or digital wallet'],['Tax','W-9 before first payout; 1099 when required'],['Payment processor','Stripe (Connect for payouts)'],['Processing costs','Paid from MOLE’s fee — never charged to members or added to rewards']]},
+ {g:'Reward Wallet',rows:[['Minimum deposit','$50 or five rewards, whichever is greater'],['Low balance','Offer pauses below one reward'],['Unused funds','Withdrawable, less processing costs']]},
+ {g:'Integrity',rows:[['Recruiting','Never paid — earn only on your own referrals'],['Disclosure','Every share includes “#ad – I may earn a reward”'],['Restricted categories','Real estate, insurance, lending, legal, medical: listing only'],['Disputes','File within 30 days; decision within 14 days']]}];
+const ADMIN={verify:{hint:'New businesses waiting for verification.',l1:'Verify',l2:'Request info',s1:'Verified',s2:'Info requested',items:[{id:'v1',n:'Glow Beauty Bar',s:'Beauty · 4.1 mi · EIN verified'},{id:'v2',n:'Peach State Plumbing',s:'Home Services · License #PL-22841'},{id:'v3',n:'Sunrise Realty',s:'Real Estate · restricted — listing only, no reward'}]},
+ disputes:{hint:'Decide within 14 days of filing.',l1:'Uphold member',l2:'Side with business',s1:'Member upheld',s2:'Business upheld',items:[{id:'d1',n:'Cary P. vs CleanTech Services',s:'$20 lead · “Outside service area” · decide by Nov 14'},{id:'d2',n:'Lisa B. vs Crown Thread Co.',s:'$5 sale · refund claimed · decide by Nov 11'}]},
+ fraud:{hint:'Flagged by click, household and chargeback checks.',l1:'Suspend / reverse',l2:'Clear flag',s1:'Action taken',s2:'Cleared',items:[{id:'f1',n:'Repeated clicks',s:'46 clicks from one device on mole.network/dj88 in 10 minutes'},{id:'f2',n:'Household match',s:'Referrer and buyer share an address — HavSum order #HB-20377'},{id:'f3',n:'Chargeback',s:'FitLife sign-up refunded — reverse $12.00 reward'}]}};
+const CATS=[['Real estate','Brokerage and property services'],['Insurance','Policies and agents'],['Lending','Loans and mortgages'],['Legal','Attorneys and legal services'],['Medical','Licensed health care']];
+const PERSIST=['fundMethod','ms','payoutReady','wallet','disputed','follow','readIds','leadStatus','social','notif','priv','addonWait','adminStatus','catAllow','nameOverride','interests','cap','txns','fm','payMethod','certify','batchDone'];
+const SLIDES=[{title:'Connect people.',body:'Grow a trusted network of the people you actually know.'},{title:'Create opportunities.',body:'Share local businesses you believe in, on the apps you already use.'},{title:'Share in the value.',body:'Earn when your referral leads to a verified result. Free to join — always.'}];
+const AV=[['#0F4D30','#F3D489'],['#E6BE62','#062A19'],['#DDE8E0','#0A3B24'],['#2E6B4A','#fff'],['#F2E6C8','#6B4A12']];
+const CONN=[['Tonya Williams','Mar 12, 2026',6],['Marcus Green','Mar 10, 2026',3],['Angela Smith','Mar 8, 2026',9],['Kevin Johnson','Mar 5, 2026',1],['Lisa Brown','Feb 28, 2026',4],['Darnell Price','Feb 21, 2026',2]];
+const EARN=[
+ {biz:'Parker Consulting',what:'10% of $1,200 sale',d:'Oct 22',amt:102,status:'Pending',tone:'#3A4A3F'},
+ {biz:'HavSum Brownies',what:'6 sales',d:'Oct 20',amt:6,status:'Pending',tone:'#6B2E22'},
+ {biz:'FitLife Wellness',what:'Sign-up',d:'Oct 18',amt:12,status:'Pending',tone:'#2E6B4A'},
+ {biz:'CleanTech Services',what:'Qualified lead',d:'Oct 15',amt:20,status:'Approved',tone:'#2F5E6E'},
+ {biz:'FitLife Wellness',what:'Sign-up',d:'Oct 2',amt:12,status:'Approved',tone:'#2E6B4A'},
+ {biz:'HavSum Brownies',what:'8 sales',d:'Sep 28',amt:8,status:'Approved',tone:'#6B2E22'},
+ {biz:'CleanTech Services',what:'Lead not accepted',d:'Oct 11',amt:20,status:'Rejected',tone:'#2F5E6E'}];
+const PAYS={Pending:'Clears hold · pays Dec 15',Approved:'Pays Nov 15',Rejected:'Dispute within 30 days of rejection'};
+const TRACK={'7':[38,5,2,'$26'],'30':[124,18,6,'$120'],'90':[311,41,15,'$160']};
+const BD={'7':{v:[312,46,9,3],paid:60,label:'Last 7 days',start:'Oct 24',n:7},'30':{v:[1248,184,36,12],paid:240,label:'Last 30 days',start:'Oct 1',n:30},'90':{v:[3410,502,88,31],paid:620,label:'Last 90 days',start:'Aug 2',n:30}};
+const REWARD_TYPES=[['fixed','Fixed per sale','$ per purchase'],['pct','% of sale','Share of sale amount'],['lead','Per lead','Qualified inquiry'],['signup','Per sign-up','Enroll or appointment']];
+
+class Component extends DCLogic {
+  state={screen:this.props.startScreen||'welcome',hist:[],slide:0,authMode:'join',form:{name:'',email:'',pw:''},formErr:'',netTab:'conn',cat:'All',q:'',biz:'havsum',follow:{},bizTab:'offers',adStep:1,adErr:'',ad:{name:'HavSum Brownies',cat:'Food & Beverages',desc:'Chocolate and red velvet brownies with a granola crust.',type:'fixed',amount:'5',cap:'50',criteria:''},range:'30',bdRange:'30',earnFilter:'All',toast:'',copied:false,wallet:18,fm:{legal:'',tin:'',addr:'',city:'',st:'GA',zip:'',routing:'',account:'',walletId:'',pName:'',pEmail:'cary@example.com',pPhone:'(404) 555-0142',pCity:'Atlanta, GA',pBio:'',dDetails:''},payMethod:'ach',certify:false,payoutReady:false,social:{Facebook:true,Instagram:true,WhatsApp:true,TikTok:false,LinkedIn:false},notif:{verified:true,payout:true,offers:true,circle:true,bizref:true,walletlow:true,email:true,sms:false},priv:{showName:true,circleSees:true,twofa:false},readIds:[],leadFilter:'All',leadStatus:{},dispReason:0,depositAmt:100,cap:50,txns:[{t:'Reward — Order #HB-20412',a:'-$2.00',d:'Oct 20'},{t:'Reward — Order #HB-20398',a:'-$2.00',d:'Oct 17'},{t:'Deposit',a:'+$50.00',d:'Oct 1'}],addonWait:{},adminTab:'verify',adminStatus:{},catAllow:{},batchDone:false,sheet:false,sort:'top',radius:25,nameOverride:'',onStep:1,interests:[],ms:{joined:true,share:true,click:true,earn:true},fromOffer:null,postPick:0,disputed:false,vw:1200,vh:900,coarse:false};
+  componentDidUpdate(){try{const o={};PERSIST.forEach(k=>o[k]=this.state[k]);localStorage.setItem('mole-v3',JSON.stringify(o));}catch(e){}}
+  componentDidMount(){window.__moleGo=(k,x)=>this.root(k,x||{});try{const sv=JSON.parse(localStorage.getItem('mole-v3')||'null');if(sv)this.setState(sv);}catch(e){}this.onResize=()=>this.setState({vw:window.innerWidth,vh:window.innerHeight,coarse:!!(window.matchMedia&&matchMedia('(pointer:coarse)').matches)});this.onResize();requestAnimationFrame(this.onResize);setTimeout(this.onResize,300);window.addEventListener('resize',this.onResize);window.addEventListener('orientationchange',this.onResize);this.timer=setInterval(()=>{if(this.state.screen==='welcome')this.setState(s=>({slide:(s.slide+1)%3}))},4000);}
+  componentWillUnmount(){window.removeEventListener('resize',this.onResize);window.removeEventListener('orientationchange',this.onResize);clearInterval(this.timer);clearTimeout(this.tt);}
+  go=(screen,extra={})=>this.setState(s=>({screen,hist:[...s.hist,s.screen].slice(-30),...extra}));
+  root=(screen,extra={})=>this.setState({screen,hist:[],...extra});
+  back=()=>this.setState(s=>{const h=[...s.hist];const p=h.pop()||'dashboard';return {screen:p,hist:h};});
+  flash=(t)=>{clearTimeout(this.tt);this.setState({toast:t});this.tt=setTimeout(()=>this.setState({toast:'',copied:false}),1800);};
+  setForm=k=>e=>{const v=e.target.value;this.setState(s=>({form:{...s.form,[k]:v},formErr:''}));};
+  setAd=k=>e=>{const v=e.target.value;this.setState(s=>({ad:{...s.ad,[k]:v},adErr:''}));};
+  submitAuth=()=>{const {form,authMode}=this.state;
+    if(authMode==='join'&&form.name.trim().length<2)return this.setState({formErr:'Enter your full name.'});
+    if(!/^\S+@\S+\.\S+$/.test(form.email))return this.setState({formErr:'Enter a valid email address.'});
+    if(form.pw.length<6)return this.setState({formErr:'Password must be at least 6 characters.'});
+    this.afterAuth();};
+  afterAuth=()=>{if(this.state.authMode==='join'){this.root('onboard',{onStep:1,ms:{joined:true,share:false,click:false,earn:false}});this.flash('Welcome to MOLE Network');}else{this.root('dashboard');this.flash('Signed in');}};
+  markShare=()=>this.setState(s=>({ms:{...s.ms,share:true}}));
+  adNext=()=>{const {adStep,ad}=this.state;
+    if(adStep===1&&!ad.name.trim())return this.setState({adErr:'Business name is required.'});
+    const restr=['Real Estate','Insurance','Legal Services'].includes(ad.cat);
+    if(adStep===2&&!restr){const a=parseFloat(ad.amount)||0,rw=ad.type==='pct'?2.5*a:a;
+      if(!(a>0))return this.setState({adErr:'Enter a reward amount.'});
+      if(!(parseInt(ad.cap)>0))return this.setState({adErr:'Set a monthly cap.'});
+      if((this.props.enforceMinReward??true)&&rw<5)return this.setState({adErr:'Minimum reward is $5.00 per verified result.'});}
+    if(adStep<3)return this.setState({adStep:adStep+1,adErr:''});
+    this.root('bizdash',{adStep:1});this.flash('Offer published');};
+  adBack=()=>{if(this.state.adStep>1)this.setState(s=>({adStep:s.adStep-1,adErr:''}));else this.back();};
+  bizEx(b){let r=b.amt,note='';
+    if(b.kind==='pct'){r=b.ex*b.amt/100;note=`Example: ${b.amt}% of a $${b.ex.toLocaleString()} engagement. `;}
+    const f=feeFor(r);
+    note+=f.min?'MOLE keeps a $1.00 minimum fee on small rewards.':`MOLE keeps a disclosed ${Math.round(f.rate*100)}% platform fee. The business funds the reward.`;
+    return {reward:money(r),fee:money(f.fee),member:money(f.member),note};}
+
+  setF=k=>e=>{const v=e.target.value;this.setState(st=>({fm:{...st.fm,[k]:v}}));};
+  tgl=(on,go)=>({bg:on?G7:'#C9CFCB',x:on?20:0,go});
+  flip=(group,k)=>()=>this.setState(st=>({[group]:{...st[group],[k]:!st[group][k]}}));
+  extraVals(s,name){
+    const fmKeys=Object.keys(s.fm),fh={};fmKeys.forEach(k=>fh[k]=this.setF(k));
+    const opt=(on)=>({bg:on?'#EEF4F0':'#fff',bd:on?G7:'#DCE2DE',fg:on?G8:'#10241A'});
+    const unread=INBOX.filter(n=>!s.readIds.includes(n.id));
+    const leads=LEADS.filter(l=>s.leadFilter==='All'||l.kind+'s'===s.leadFilter).map(l=>{const st=s.leadStatus[l.id];return {...l,rewardStr:money(l.reward),dueStr:st?'':'Verify by '+l.due+' · '+l.left,dueC:l.left.startsWith('1')?'#B3261E':'#7A5614',open:!st,closed:!!st,status:st==='a'?'Approved':'Disputed — MOLE reviewing',sbg:st==='a'?'#E3F0E7':'#FBE4E1',sfg:st==='a'?G7:'#B3261E',approve:()=>{this.setState(x=>({leadStatus:{...x.leadStatus,[l.id]:'a'}}));this.flash('Approved — reward moves to hold');},dispute:()=>{this.setState(x=>({leadStatus:{...x.leadStatus,[l.id]:'d'}}));this.flash('Dispute sent to MOLE');}};});
+    const ad=ADMIN[s.adminTab];
+    const nm=s.nameOverride||name;
+    return {
+      fv:s.fm,fh,
+      payMethods:[['ach','Direct deposit','ACH to your bank'],['wallet','Digital wallet','Via MOLE’s processor']].map(([k,n,sub])=>({name:n,sub,...opt(s.payMethod===k),go:()=>this.setState({payMethod:k})})),
+      isAch:s.payMethod==='ach',isWalletPay:s.payMethod==='wallet',
+      stripe:(()=>{const done=s.payoutReady,busy=s.stripeBusy;
+        const steps=[['Verify identity','Name, date of birth, last 4 of SSN'],['Add bank account','Instant bank login or routing number'],['Tax info (W-9)','Collected by Stripe for Form 1099']].map(([n,d],i)=>({n,d:done?(i===1?'Bank ending 6789':'Complete'):d,mark:done?'✓':String(i+1),bg:done?G7:'#fff',fg:done?'#fff':'#5E6B63',bd:done?G7:'#DCE2DE'}));
+        return {steps,kicker:done?'Payouts active':'About 3 minutes',title:done?'You’re ready for Nov 15':'Get paid with Stripe',sub:done?'$40.00 will be sent to bank ending 6789 on Nov 15. Stripe sends your 1099 when required.':'Stripe securely verifies your identity, links your bank and collects your W-9. Needed only before your first payout.',
+          cta:done?'Manage in Stripe':busy?'Opening Stripe…':'Continue to Stripe',
+          go:()=>{if(done)return this.flash('Opens your Stripe Express dashboard');if(busy)return;this.setState({stripeBusy:true});setTimeout(()=>{this.setState({stripeBusy:false,payoutReady:true});this.flash('Stripe account verified');},1400);}};})(),
+      fundMethods:[['ach','Bank (ACH)','Business checking ••6610'],['card','Card','Visa •• 4242']].map(([k,n,sub])=>({name:n,sub,...opt((s.fundMethod||'ach')===k),go:()=>this.setState({fundMethod:k})})),
+      certify:this.tgl(s.certify,()=>this.setState(x=>({certify:!x.certify}))),
+      savePayout:()=>{const m=s.fm;
+        if(m.legal.trim().length<2)return this.flash('Enter your legal name');
+        if(m.tin.replace(/\D/g,'').length<9)return this.flash('Enter a 9-digit SSN or EIN');
+        if(!m.addr.trim()||!m.city.trim()||m.zip.replace(/\D/g,'').length<5)return this.flash('Complete your address');
+        if(s.payMethod==='ach'&&(m.routing.replace(/\D/g,'').length!==9||m.account.replace(/\D/g,'').length<4))return this.flash('Check routing (9 digits) and account');
+        if(s.payMethod==='wallet'&&m.walletId.trim().length<5)return this.flash('Enter your wallet email or phone');
+        if(!s.certify)return this.flash('Please certify your tax info');
+        this.setState({payoutReady:true});this.back();this.flash('Payout details saved');},
+      payoutLine:s.payoutReady?'$25 minimum met · Stripe payout to bank ending 6789':(s.stripeBusy?'Verifying with Stripe…':'$25 minimum met · set up Stripe payouts to get paid →'),
+      payoutLineC:s.payoutReady?'#5E6B63':'#B3261E',goPayout:()=>this.go('payout'),
+      goEditProfile:()=>{this.setState(x=>({fm:{...x.fm,pName:x.fm.pName||nm}}));this.go('editprofile');},
+      soonPhoto:()=>this.flash('Photo picker opens here'),
+      saveProfile:()=>{if(s.fm.pName.trim().length<2)return this.flash('Enter your name');if(!/^\S+@\S+\.\S+$/.test(s.fm.pEmail))return this.flash('Enter a valid email');this.setState({nameOverride:s.fm.pName.trim()});this.back();this.flash('Profile saved');},
+      socialRows:[['Facebook','f','#1877F2'],['Instagram','IG','#C13584'],['WhatsApp','W','#25A35A'],['TikTok','TT','#111'],['LinkedIn','in','#0A66C2']].map(([n,l,c])=>{const on=s.social[n];return {name:n,l,c,sub:on?'Connected for one-tap sharing':'Not connected',btn:on?'Disconnect':'Connect',bg:on?'#fff':G8,fg:on?'#B3261E':'#fff',bd:on?'#E3B5B0':G8,go:()=>{this.flip('social',n)();this.flash(on?n+' disconnected':n+' connected');}};}),
+      notifRowsA:[['verified','Referral updates','Clicks, verifications and holds'],['payout','Payouts','Scheduled, sent, or held'],['offers','New offers for you','Matches your interests'],['circle','Circle activity','Offers your connections share']].map(([k,label,sub])=>({label,sub,...this.tgl(s.notif[k],this.flip('notif',k))})),
+      notifRowsB:[['bizref','New referral to review','7-day verify reminders'],['walletlow','Wallet low','Before your offer pauses']].map(([k,label,sub])=>({label,sub,...this.tgl(s.notif[k],this.flip('notif',k))})),
+      notifRowsC:[['email','Email summary','Weekly recap'],['sms','Text messages','Payouts and urgent alerts only']].map(([k,label,sub])=>({label,sub,...this.tgl(s.notif[k],this.flip('notif',k))})),
+      privRows:[['showName','Show my name to customers','On purchase confirmations, with permission'],['circleSees','Let my circle see offers I share','Never your earnings'],['twofa','Two-step verification','Code by text at sign-in']].map(([k,label,sub])=>({label,sub,...this.tgl(s.priv[k],this.flip('priv',k))})),
+      secActions:[{label:'Change password',c:'#10241A',go:()=>this.flash('Reset link sent to '+s.fm.pEmail)},{label:'Download my data',c:'#10241A',go:()=>this.flash('We’ll email your data within 48 hours')},{label:'Delete account',c:'#B3261E',go:()=>this.flash('Unpaid approved rewards are paid out before deletion')}],
+      ruleGroups:RULES.map(g=>({g:g.g,rows:g.rows.map(([k,v])=>({k,v}))})),
+      inbox:INBOX.map(n=>{const r=s.readIds.includes(n.id);return {...n,bg:r?'#fff':'#F7FBF8',dot:r?'transparent':'#E6BE62',go:()=>{this.setState(x=>({readIds:[...new Set([...x.readIds,n.id])]}));this.go(n.go,n.biz?{biz:n.biz,bizTab:'offers'}:{});}};}),
+      hasUnread:unread.length>0,goInbox:()=>this.go('inbox'),markAllRead:()=>this.setState({readIds:INBOX.map(n=>n.id)}),
+      leadFilters:['All','Sales','Leads'].map(n=>({name:n,bg:n===s.leadFilter?'#fff':'transparent',fg:n===s.leadFilter?G8:'#5E6B63',go:()=>this.setState({leadFilter:n})})),
+      leads,openLeads:LEADS.filter(l=>!s.leadStatus[l.id]).length,goBizLeads:()=>this.go('bizleads'),
+      goWallet:()=>this.go('wallet'),goAddons:()=>this.go('addons'),
+      depositOpts:[50,100,250].map(a=>({label:'$'+a,...opt(s.depositAmt===a),go:()=>this.setState({depositAmt:a})})),
+      depositStr:'$'+s.depositAmt,
+      addFunds:()=>{this.setState(x=>({wallet:x.wallet+x.depositAmt,txns:[{t:'Deposit',a:'+$'+x.depositAmt.toFixed(2),d:'Today'},...x.txns]}));this.flash('$'+s.depositAmt+'.00 added via Stripe');},
+      withdraw:()=>{const free=Math.max(s.wallet-6,0);if(free<=0)return this.flash('No unused funds to withdraw');this.setState(x=>({wallet:6,txns:[{t:'Withdrawal (less processing)',a:'-'+money(free),d:'Today'},...x.txns]}));this.flash('Withdrawal requested');},
+      cap:s.cap,capDown:()=>this.setState(x=>({cap:Math.max(5,x.cap-5)})),capUp:()=>this.setState(x=>({cap:x.cap+5})),
+      txns:s.txns.map(t=>({...t,c:t.a.startsWith('+')?G7:'#10241A'})),
+      notDisputed:!s.disputed,disputedNow:s.disputed,
+      dispReasons:['It met the posted lead criteria','Customer confirmed the inquiry','Tracking or attribution error','Something else'].map((n,i)=>({name:n,bd:i===s.dispReason?G7:'#C9CFCB',dot:i===s.dispReason?G7:'transparent',go:()=>this.setState({dispReason:i})})),
+      submitDispute:()=>{if(s.fm.dDetails.trim().length<10)return this.flash('Add a few details for the reviewer');this.setState({disputed:true});this.flash('Dispute filed — decision within 14 days');},
+      dispTimeline:[['Dispute filed','Oct 31',true],['MOLE reviewing evidence','In progress',false],['Final decision','By Nov 14',false]].map(([n,d,done],i)=>({n,d,mark:done?'✓':String(i+1),bg:done?G7:i===1?'#E6BE62':'#C9CFCB'})),
+      addons:[['featured','Featured listing','Top placement in your marketplace category.'],['sponsored','Sponsored offer','Promote your offer in members’ Share & Earn feed.'],['analytics','Advanced analytics','Ad views, clicks, leads and cost per customer over time.']].map(([k,n,d])=>{const on=s.addonWait[k];return {n,d,btn:on?'On the waitlist ✓':'Join waitlist',bg:on?'#EEF4F0':'#fff',fg:G8,go:()=>{this.flip('addonWait',k)();if(!on)this.flash('We’ll notify you when '+n.toLowerCase()+' launches');}};}),
+      adminTabs:[['verify','Verify'],['disputes','Disputes'],['payouts','Payouts'],['fraud','Fraud'],['cats','Categories']].map(([k,n])=>({name:n,bg:k===s.adminTab?'#E6BE62':'transparent',fg:k===s.adminTab?'#062A19':'#D7E3DB',bd:k===s.adminTab?'#E6BE62':'rgba(255,255,255,.25)',go:()=>this.setState({adminTab:k})})),
+      adminIs:{list:!!ad,payouts:s.adminTab==='payouts',cats:s.adminTab==='cats'},
+      adminHint:ad?ad.hint:'',
+      adminItems:ad?ad.items.map(it=>{const st=s.adminStatus[it.id];return {...it,l1:ad.l1,l2:ad.l2,open:!st,closed:!!st,status:st===1?ad.s1:ad.s2,sbg:st===1?'#E3F0E7':'#F2EFE6',sfg:st===1?G7:'#5E6B63',a1:()=>this.setState(x=>({adminStatus:{...x.adminStatus,[it.id]:1}})),a2:()=>this.setState(x=>({adminStatus:{...x.adminStatus,[it.id]:2}}))};}):[],
+      approveBatch:()=>{if(!s.batchDone){this.setState({batchDone:true});this.flash('Nov 15 batch approved');}},batchLabel:s.batchDone?'Batch approved ✓':'Approve batch',
+      catRows:CATS.map(([n,sub])=>({label:n,sub:s.catAllow[n]?'Rewards allowed — attorney approved':sub+' · rewards off',...this.tgl(!!s.catAllow[n],this.flip('catAllow',n))})),
+      sheet:s.sheet,openSheet:()=>this.setState({sheet:true}),closeSheet:()=>this.setState({sheet:false}),
+      sortOpts:[['top','Top paying'],['near','Nearest'],['new','Newest']].map(([k,n])=>({name:n,...opt(s.sort===k),go:()=>this.setState({sort:k})})),
+      radiusOpts:[5,10,25].map(r=>({name:r+' mi',...opt(s.radius===r),go:()=>this.setState({radius:r})})),
+      filterBg:s.sort!=='top'||s.radius!==25?'#E6BE62':'rgba(255,255,255,.14)',filterFg:s.sort!=='top'||s.radius!==25?'#062A19':'#fff'
+    };
+  }
+  netVal(b){return feeFor(b.kind==='pct'?b.ex*b.amt/100:b.amt).member;}
+  netLabel(b){const m=money(this.netVal(b));return b.kind==='pct'?'You earn '+m+' on a $'+b.ex.toLocaleString()+' job':'You earn '+m;}
+  renderVals(){
+    const s=this.state,p=this.props,scr=s.screen;
+    const name=s.nameOverride||(p.memberName??'Cary Parker'),first=name.split(' ')[0]||name;
+    const initials=name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    const code=(first.toUpperCase()+'123').slice(0,10);
+    const is={};SCREENS.forEach(([k])=>is[k]=scr===k);
+    const curB=BIZ.find(b=>b.id===s.biz)||BIZ[0];
+    const lead=curB.kind==='lead';
+    const cur={...curB,ex:this.bizEx(curB),terms:[{k:'What qualifies',v:curB.qual},{k:'Referral window',v:lead?'7 days from click':'30 days from click'},{k:'Holding period',v:lead?'14 days after approval':'30 days after approval'},{k:'First-time customers only',v:curB.first},{k:'Business verifies within',v:'7 days, then auto-approves'}]};
+    const tabOf={dashboard:'home',network:'network',marketplace:'market',bizprofile:'market',earnings:'earnings',tracking:'earnings',profile:'more',bizdash:'more'}[scr];
+    const tab={};['home','network','market','earnings','more'].forEach(k=>tab[k]=k===tabOf?G7:'#9AA49E');
+    const pill=(on)=>({bg:on?G8:'#fff',fg:on?'#fff':'#10241A',bd:on?G8:'#DCE2DE'});
+    const seg=(on,dark)=>({bg:on?(dark?'#fff':'#fff'):'transparent',fg:on?G8:(dark?'#D7E3DB':'#5E6B63')});
+    const q=s.q.trim().toLowerCase();
+    const sorter={top:(a,b)=>this.netVal(b)-this.netVal(a),near:(a,b)=>DIST[a.id]-DIST[b.id],new:(a,b)=>(b.isNew?1:0)-(a.isNew?1:0)}[s.sort];
+    const bizList=BIZ.filter(b=>(s.cat==='All'||b.cat===s.cat)&&DIST[b.id]<=s.radius&&(!q||(b.name+b.type).toLowerCase().includes(q))).sort(sorter).map(b=>({...b,distStr:DIST[b.id]+' mi',net:this.netLabel(b),open:()=>this.go('bizprofile',{biz:b.id,bizTab:'offers'})}));
+    // post ad calc
+    const amt=parseFloat(s.ad.amount)||0,isPct=s.ad.type==='pct',restricted=['Real Estate','Insurance','Legal Services'].includes(s.ad.cat);
+    const r=isPct?250*amt/100:amt,f=feeFor(r||0);
+    const calc0={basis:isPct?' · on a $250 sale':'',reward:money(r),member:money(f.member),fee:money(r?f.fee:0),rate:f.min?'$1 min':Math.round(f.rate*100)+'%',warn:!isPct&&amt>0&&amt<5,
+      deposit:money(Math.max(5*r,50)),badge:isPct?`Earn ${amt}% per sale`:`Earn $${amt} ${({fixed:'per sale',lead:'per lead',signup:'per sign-up'})[s.ad.type]}`};
+    const calc=restricted?{...calc0,badge:'Listing only — no referral reward',deposit:'$0.00 (listing only)',warn:false}:{...calc0,warn:calc0.warn&&!(p.enforceMinReward??true)};
+    const bd=BD[s.bdRange];
+    const seed=[22,35,28,41,30,52,46,38,60,44,33,48,70,55,40,62,58,45,75,66,50,80,64,57,90,72,61,85,78,95];
+    const fromB=s.fromOffer?BIZ.find(b=>b.id===s.fromOffer):null;
+    const cats=s.interests.map(n=>INTERESTS[n]);
+    let matched=[...(fromB?[fromB]:[]),...BIZ.filter(b=>cats.includes(b.cat)&&b!==fromB)];
+    BIZ.forEach(b=>{if(!matched.includes(b))matched.push(b);});matched=matched.slice(0,3);
+    const rec=BIZ.find(b=>cats.includes(b.cat))||BIZ.find(b=>b.id==='cleantech');
+    const msKeys=[['joined','Joined'],['share','First share'],['click','First click'],['earn','First earning']];
+    const firstOpen=msKeys.findIndex(([k])=>!s.ms[k]);
+    const msList=msKeys.map(([k,n],i)=>{const d=s.ms[k],cu=i===firstOpen;return {name:n,mark:d?'✓':String(i+1),bg:d?G7:'#fff',fg:d?'#fff':cu?'#9A6E1C':'#9AA49E',bd:d?G7:cu?'#E6BE62':'#DCE2DE',lc:d||cu?'#10241A':'#9AA49E'};});
+    const msDone=msKeys.filter(([k])=>s.ms[k]).length;
+    const posts=[`Honestly one of my favorite local spots — ${cur.name}. Highly recommend.`,`If you need ${cur.type.toLowerCase()}, try ${cur.name}. I trust them.`,`Quick rec: ${cur.name}. Tell them I sent you!`];
+    const STAGES=['Clicked','Action','Verified','Hold','Paid'];
+    const REFS=[{t:'Service inquiry',biz:'CleanTech Services',amt:'$20.00',done:2,dates:['Oct 18','Oct 19','by Oct 26'],note:'Business has until Oct 26 to verify. Undisputed results approve automatically.'},
+      {t:'Brownie order',biz:'HavSum Brownies',amt:'$1.00',done:3,dates:['Oct 14','Oct 14','Oct 16','to Nov 15','Dec 15'],note:'In 30-day hold for refunds. Pays Dec 15.'},
+      {t:'Membership sign-up',biz:'FitLife Wellness',amt:'$12.00',done:4,dates:['Sep 1','Sep 2','Sep 4','Oct 4','Nov 15'],note:'Cleared hold. Included in your Nov 15 payout.'},
+      {t:'Link click',biz:'Parker Consulting',amt:'',done:1,dates:['Oct 18'],note:'Referral window open until Nov 17 (30 days).'}];
+    const bars=seed.slice(-bd.n).map((v,i,a)=>({h:v,c:i===a.length-1?GOLD:G7}));
+    const tr=TRACK[s.range];
+    const earnList=EARN.filter(e=>s.earnFilter==='All'||e.status===s.earnFilter).map(e=>({...e,amt:money(e.amt),pays:e.status==='Pending'&&e.biz==='Parker Consulting'?'Clears hold · pays Jan 15':(e.status==='Rejected'&&s.disputed?'Dispute under review · decision by Nov 13':PAYS[e.status]),canDispute:e.status==='Rejected',disputeLabel:s.disputed?'Dispute filed':'Dispute',dispute:()=>this.go('dispute'),sbg:e.status==='Pending'?'#FBF1D9':e.status==='Rejected'?'#FBE4E1':'#E3F0E7',sfg:e.status==='Pending'?'#7A5614':e.status==='Rejected'?'#B3261E':G7}));
+    const welcome=scr==='welcome',light=['welcome','bizprofile','onboard','confirm'].includes(scr);
+    const app=!window.__moleShot&&(s.vw<600||s.coarse||s.vh<700);
+    const L=app?{app:true,frame:false,gap:'0',pad:'0',pageBg:'#0A3B24',outerW:'min(100%,600px)',outerH:'100dvh',outerR:'0',outerBg:'transparent',outerPad:'0',outerSh:'none',innerR:'0',bottomPad:'calc(6px + env(safe-area-inset-bottom,0px))',welcomePad:'calc(20px + env(safe-area-inset-bottom,0px))'}
+      :{app:false,frame:true,gap:'48px',pad:'40px 24px',pageBg:'#E9E6DD',outerW:'414px',outerH:'868px',outerR:'58px',outerBg:'#0B0F0D',outerPad:'12px',outerSh:'0 30px 60px -20px rgba(6,42,25,.45),0 0 0 1px rgba(0,0,0,.4)',innerR:'46px',bottomPad:'26px',welcomePad:'22px'};
+    
+    return {
+      L,showSide:(p.showScreenIndex??true)&&!app,name,first,initials,code,is,cur,tab,
+      statusBg:light?'#fff':G8,statusFg:light?'#10241A':'#fff',homeBar:welcome?'rgba(255,255,255,.6)':'#10241A',
+      showTabs:['dashboard','network','marketplace','profile','tracking','earnings','bizdash'].includes(scr),
+      screenList:SCREENS.map(([k,l],i)=>({num:NUMS[i],label:l,bg:k===scr?G8:'transparent',fg:k===scr?'#fff':'#10241A',go:()=>this.go(k,k==='postad'?{adStep:1}:{})})),
+      slide:SLIDES[s.slide],slideDots:SLIDES.map((_,i)=>({w:i===s.slide?24:8,bg:i===s.slide?'#E6BE62':'rgba(255,255,255,.3)',go:()=>this.setState({slide:i})})),
+      goJoin:()=>this.go('auth',{authMode:'join',formErr:'',fromOffer:null}),goSignIn:()=>this.go('auth',{authMode:'signin',formErr:'',fromOffer:null}),goMarket:()=>this.go('marketplace'),
+      back:this.back,
+      isJoin:s.authMode==='join',authTitle:s.authMode==='join'?'Create your account':'Welcome back',authSub:s.authMode==='join'?'Free forever for members. Share businesses you already trust.':'Sign in to keep sharing and earning.',
+      authCta:s.authMode==='join'?'Join Now':'Sign In',pwPlaceholder:s.authMode==='join'?'Create password':'Password',
+      authTab:{joinBg:s.authMode==='join'?'#fff':'transparent',joinFg:s.authMode==='join'?G8:MUTE,joinSh:s.authMode==='join'?'0 1px 3px rgba(0,0,0,.1)':'none',inBg:s.authMode!=='join'?'#fff':'transparent',inFg:s.authMode!=='join'?G8:MUTE,inSh:s.authMode!=='join'?'0 1px 3px rgba(0,0,0,.1)':'none'},
+      setJoin:()=>this.setState({authMode:'join',formErr:''}),setSignIn:()=>this.setState({authMode:'signin',formErr:''}),
+      form:s.form,onName:this.setForm('name'),onEmail:this.setForm('email'),onPw:this.setForm('pw'),hasFormErr:!!s.formErr,formErr:s.formErr,submitAuth:this.submitAuth,
+      socials:[{name:'Google',l:'G',c:'#4A6FA5'},{name:'Facebook',l:'f',c:'#1877F2'},{name:'Apple',l:'',c:'#111'}],
+      socialLogin:this.afterAuth,
+      soon:()=>this.flash('Coming in a later build'),
+      profileRows:[['Personal information','P','editprofile',''],['Social media links','S','social',Object.values(s.social).filter(Boolean).length+' linked'],['My business','B','bizdash','Owner'],['Payout setup (W-9 & bank)','$','payout',s.payoutReady?'Ready':'Before 1st payout'],['Notification settings','N','notifsettings',''],['Privacy & security','L','privacy',''],['Program rules','R','rules','Confirmed'],['MOLE staff console','M','admin','Staff']].map(([label,i,t,tag])=>({label,i,tag,go:t?()=>this.go(t):()=>this.flash('Coming in a later build')})),
+      signOut:()=>this.root('welcome'),
+      dashStats:[{label:'Offers shared',v:'12',go:()=>this.go('tracking')},{label:'Verified results',v:'6',go:()=>this.go('tracking')},{label:'Qualified leads',v:'8',go:()=>this.go('tracking')},{label:'Link clicks',v:'124',go:()=>this.go('tracking')}],
+      goEarnings:()=>this.go('earnings'),goTracking:()=>this.go('tracking'),goPostAd:()=>this.go('postad',{adStep:1,adErr:''}),goShareDefault:()=>this.go('share',{biz:'havsum',copied:false}),
+      isTeam:s.netTab==='team',isConn:s.netTab!=='team',netTab:{connFg:s.netTab==='conn'?G8:MUTE,connLine:s.netTab==='conn'?GOLD:'transparent',teamFg:s.netTab==='team'?G8:MUTE,teamLine:s.netTab==='team'?GOLD:'transparent'},
+      setConn:()=>this.setState({netTab:'conn'}),setTeam:()=>this.setState({netTab:'team'}),
+      connections:CONN.map(([n,d,c],i)=>({name:n,ini:n.split(' ').map(w=>w[0]).join(''),bg:AV[i%5][0],fg:AV[i%5][1],sub:s.netTab==='team'?`${c} connections of their own`:`Direct connection · Joined ${d}`,meta:s.netTab==='team'?'Tracking':''})),
+      invite:()=>this.flash('Invite copied — opens the HavSum offer'),
+      q:s.q,onQ:e=>this.setState({q:e.target.value}),
+      cats:['All','Food','Retail','Services','Home','Health'].map(c=>({name:c,...pill(c===s.cat),go:()=>this.setState({cat:c})})),
+      bizList,noBiz:bizList.length===0,bizCount:bizList.length+' listed',
+      followLabel:s.follow[cur.id]?'Following':'Follow',followBg:s.follow[cur.id]?'#FBF1D9':'#BF8C2C',followFg:s.follow[cur.id]?'#7A5614':'#fff',
+      toggleFollow:()=>this.setState(st=>({follow:{...st.follow,[cur.id]:!st.follow[cur.id]}})),
+      bizTabs:[['about','About'],['products','Products'],['offers','Offers']].map(([k,n])=>({name:n,fg:k===s.bizTab?G8:MUTE,line:k===s.bizTab?GOLD:'transparent',go:()=>this.setState({bizTab:k})})),
+      bizTabIs:{about:s.bizTab==='about',products:s.bizTab==='products',offers:s.bizTab==='offers'},
+      goShare:()=>this.go('share',{copied:false}),
+      adSteps:['Details','Offer','Review'].map((n,i)=>{const k=i+1,done=k<s.adStep,on=k===s.adStep;return {name:n,mark:done?'✓':String(k),bg:done?G7:on?G8:'#fff',fg:done||on?'#fff':MUTE,bd:done?G7:on?G8:'#DCE2DE',lc:on||done?G8:MUTE};}),
+      adIs:{s1:s.adStep===1,s2:s.adStep===2,s3:s.adStep===3},ad:s.ad,
+      onAdName:this.setAd('name'),onAdCat:this.setAd('cat'),onAdDesc:this.setAd('desc'),onAdAmount:this.setAd('amount'),onAdCap:this.setAd('cap'),onAdCriteria:this.setAd('criteria'),
+      rewardTypes:REWARD_TYPES.map(([k,n,sub])=>({name:n,sub,bg:k===s.ad.type?'#EEF4F0':'#fff',bd:k===s.ad.type?G7:'#DCE2DE',go:()=>this.setState(st=>({ad:{...st.ad,type:k,amount:k==='pct'?'10':k==='lead'?'25':k==='signup'?'15':'5'}}))})),
+      amountLabel:isPct?'Reward (% of sale)':'Reward ($)',isLeadType:s.ad.type==='lead',calc,
+      hasAdErr:!!s.adErr,adErr:s.adErr,adNext:this.adNext,adBack:this.adBack,adCta:s.adStep===3?'Publish offer':'Next',
+      link:`mole.network/${first.toLowerCase()}123`,copyLabel:s.copied?'Copied':'Copy',
+      copyLink:()=>{try{navigator.clipboard&&navigator.clipboard.writeText('https://mole.network/'+first.toLowerCase()+'123')}catch(e){}this.setState({copied:true});this.markShare();this.flash('Referral link copied');},
+      shareTargets:[['Facebook','f','#1877F2'],['Instagram','IG','#C13584'],['WhatsApp','W','#25A35A'],['Text message','SMS',G7],['Email','@',GOLD]].map(([n,l,c])=>({name:n,l,c,go:()=>{this.markShare();this.flash('Opening '+n+'…');}})),
+      ranges:[['7','7 days'],['30','30 days'],['90','90 days']].map(([k,n])=>({name:n,...seg(k===s.range),bg:k===s.range?'#fff':'transparent',go:()=>this.setState({range:k})})),
+      trackStats:[{v:tr[0],label:'Link clicks',c:G8},{v:tr[1],label:'Qualified leads',c:G8},{v:tr[2],label:'Verified sales',c:G8},{v:tr[3],label:'Earnings',c:'#9A6E1C'}],
+      activityOld:[{t:'Brownie order',s:'Verified sale · HavSum Brownies',d:'Oct 20',amt:'+$1.00',c:G7},{t:'Service inquiry',s:'Lead · awaiting business review (by Oct 26)',d:'Oct 19',amt:'',c:GOLD},{t:'FitLife sign-up',s:'Approved · in 30-day hold',d:'Oct 18',amt:'+$12.00',c:G7},{t:'Link click',s:'Parker Consulting offer',d:'Oct 18',amt:'',c:'#C9CFCB'}],
+      earnFilters:['All','Pending','Approved','Rejected'].map(n=>({name:n,...pill(n===s.earnFilter),go:()=>this.setState({earnFilter:n})})),
+      earnList,
+      bdRanges:[['7','7 days'],['30','30 days'],['90','90 days']].map(([k,n])=>({name:n,bg:k===s.bdRange?'#fff':'transparent',fg:k===s.bdRange?G8:'#D7E3DB',go:()=>this.setState({bdRange:k})})),
+      bdStats:[{v:bd.v[0].toLocaleString(),label:'Ad views'},{v:bd.v[1],label:'Link clicks'},{v:bd.v[2],label:'Leads'},{v:bd.v[3],label:'Sales'}],
+      bd:{paid:'$'+bd.paid,fee:'$'+(bd.paid*.2).toFixed(0),cpc:money(bd.paid/(bd.v[2]+bd.v[3])),label:bd.label,start:bd.start},bars,
+      walletStr:money(s.wallet),topUp:()=>{this.setState(st=>({wallet:st.wallet+50}));this.flash('$50.00 added to wallet');},
+      tabGo:{home:()=>this.root('dashboard'),network:()=>this.root('network'),market:()=>this.root('marketplace'),earnings:()=>this.root('earnings'),more:()=>this.root('profile')},
+      hasToast:!!s.toast,toast:s.toast,
+      ...this.extraVals(s,name),
+      restricted,notRestricted:!restricted,
+      welcomeOffers:BIZ.slice(0,4).map(b=>({...b,amt:money(this.netVal(b)),per:b.kind==='pct'?'you get, per $2,500 job':'you get, per '+b.unit,open:()=>this.go('bizprofile',{biz:b.id,bizTab:'offers'})})),
+      hasFromOffer:!!s.fromOffer&&s.authMode==='join',fromOffer:fromB?{...fromB,net:this.netLabel(fromB)+' per '+fromB.unit}:{},
+      onBar2:s.onStep===2?G7:'#E3E7E4',onIs:{s1:s.onStep===1,s2:s.onStep===2},
+      interestOpts:Object.keys(INTERESTS).map(n=>{const on=s.interests.includes(n);return {name:n,mark:on?'✓':'',bg:on?'#EEF4F0':'#fff',bd:on?G7:'#DCE2DE',go:()=>this.setState(st=>({interests:on?st.interests.filter(x=>x!==n):[...st.interests,n]}))};}),
+      onNext:()=>{if(!s.interests.length)return this.flash('Pick at least one');this.setState({onStep:2});},
+      onOffers:matched.map(b=>({...b,net:this.netLabel(b),share:()=>this.go('share',{biz:b.id,copied:false})})),
+      skipOnboard:()=>this.root('dashboard'),
+      milestones:msList,msTitle:msDone===4?'First earning unlocked':'Your path to a first earning',msCount:msDone+' of 4',
+      rec:{...rec,net:this.netLabel(rec),open:()=>this.go('bizprofile',{biz:rec.id,bizTab:'offers'}),share:()=>this.go('share',{biz:rec.id,copied:false})},
+      circleShares:[['Tonya Williams','havsum','2h ago'],['Angela Smith','fitlife','Yesterday'],['Marcus Green','cleantech','Oct 26']].map(([n,id,w],i)=>{const b=BIZ.find(x=>x.id===id);return {first:n.split(' ')[0],ini:n.split(' ').map(x=>x[0]).join(''),bg:AV[i][0],fg:AV[i][1],biz:b.name,when:w,net:this.netLabel(b),share:()=>this.go('share',{biz:id,copied:false})};}),
+      showSections:s.cat==='All'&&!q,listTitle:s.cat==='All'&&!q?'All businesses':'Results',
+      topPaying:[...BIZ].sort((a,b)=>this.netVal(b)-this.netVal(a)).slice(0,3).map(b=>({...b,net:this.netLabel(b),open:()=>this.go('bizprofile',{biz:b.id,bizTab:'offers'})})),
+      newNear:BIZ.filter(b=>b.isNew).map(b=>({...b,net:this.netLabel(b),open:()=>this.go('bizprofile',{biz:b.id,bizTab:'offers'})})),
+      posts:posts.map((t,i)=>({text:t,bg:i===s.postPick?'#EEF4F0':'#fff',bd:i===s.postPick?G7:'#DCE2DE',go:()=>this.setState({postPick:i})})),
+      copyPost:()=>{const t=posts[s.postPick]+' #ad – I may earn a reward https://mole.network/'+first.toLowerCase()+'123';try{navigator.clipboard&&navigator.clipboard.writeText(t)}catch(e){}this.markShare();this.flash('Post copied with disclosure');},
+      referrals:REFS.map(r=>({...r,stages:STAGES.map((n,i)=>({n,d:r.dates[i]||'',c:i<r.done?G7:i===r.done?'#E6BE62':'#E3E7E4',lc:i<=r.done?'#10241A':'#9AA49E'}))})),
+      walletLow:s.wallet<25,walletCovers:Math.floor(s.wallet/2),
+      bestOffers:[['Party Box bundle · $5/order',9.1],['Brownie box · $2/sale',6.5],['First-order offer · $3',3.2]].map(([n,c],i)=>({n,conv:c+'%',w:Math.round(c*10),c:i===0?GOLD:G7})),
+      lastInitial:(name.split(' ')[1]||'')[0]?(name.split(' ')[1][0]+'.'):'',
+      startFromConfirm:()=>this.go('auth',{authMode:'join',fromOffer:'havsum',formErr:''}),noThanks:()=>this.flash('Thanks for your order!')
+    };
+  }
+}
+</script>
+</body>
+</html>
