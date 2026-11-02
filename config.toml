@@ -1,0 +1,15 @@
+project_id = "mole-network"
+
+# These functions are called by people who aren't signed in (link clicks,
+# business websites, Stripe, the scheduler). Each one checks its own secret.
+[functions.r]
+verify_jwt = false
+
+[functions.conversion]
+verify_jwt = false
+
+[functions.stripe-webhook]
+verify_jwt = false
+
+[functions.jobs]
+verify_jwt = false
